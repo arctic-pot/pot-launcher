@@ -87,6 +87,3 @@ typings/
 
 # Electron-Forge
 out/
-
-# IJ Idea
-.idea/
