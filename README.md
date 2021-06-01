@@ -1,4 +1,4 @@
-# <p align="center">Pot Launcher</p>
+### <p align="center">Pot Launcher</p>
 <p align="center">The modern and concise Minecraft launcher for developers and players </p>
 
 ## Introduce
