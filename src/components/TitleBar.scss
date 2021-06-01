@@ -1,0 +1,34 @@
+div#title-bar {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  background-color: #4dabf7;
+  color: #fff;
+  box-sizing: border-box;
+  padding-left: 10px;
+  -webkit-app-region: drag;
+
+  span#title {
+    font-weight: 600;
+  }
+
+  div#title-buttons {
+    float: right;
+    display: flex;
+    -webkit-app-region: no-drag;
+
+    div.title-button {
+      box-sizing: border-box;
+      padding: 0 5px;
+      transition-property: background-color;
+      transition-duration: 0.2s;
+      cursor: pointer;
+      width: 30px;
+      text-align: center;
+
+      &:hover {
+        background-color: #0868b8;
+      }
+    }
+  }
+}

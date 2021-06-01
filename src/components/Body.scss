@@ -1,0 +1,31 @@
+div#body {
+  width: 100%;
+  height: calc( 100% - 30px );
+  display: grid;
+  grid-template-rows: 460px 50px;
+  grid-template-columns: 200px 760px;
+
+  .body-part {
+    box-sizing: border-box;
+  }
+
+  #profile-parent {
+    display: flex;
+    box-sizing: border-box;
+    padding: 5px;
+    background-color: #d0ebff;
+
+    img#profile-img {
+      width: 40px;  // 16x2.25
+      height: 40px; // 16x2.25
+      margin-right: 10px;
+    }
+  }
+
+  #start-parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d0ebff;;
+  }
+}
