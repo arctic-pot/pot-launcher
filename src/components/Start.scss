@@ -1,0 +1,22 @@
+button#start-game-button {
+  font-size: 20px;
+  width: 135px;
+  height: 45px;
+  cursor: pointer;
+  border: none;
+  background-color: #339af0;
+  transition-property: border, background-color, transform, box-shadow, width, font-size;
+  transition-duration: 0.2s;
+  transform: translate(0, -10px);
+  box-shadow: 0 0 5px transparent;
+  font-weight: 600;
+  color: #fff;
+
+  &:hover {
+    font-size: 22px;
+    background-color: #24dca6;
+    width: 150px;
+    transform: translate(0, -15px);
+    box-shadow: 0 0 5px #888888;
+  }
+}

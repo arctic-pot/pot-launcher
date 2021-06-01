@@ -1,7 +1,7 @@
 import React from 'react';
 import './Profile.scss'
 
-export default function Profile() {
+export default function Profile(): React.ReactElement {
   const placeholder = 'data:image/svg+xml;base64,CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTY' +
     'iIGhlaWdodD0iMTYiIGZpbGw9ImN1cnJlbnRDb2xvciIgY2xhc3M9ImJpIGJpLXBlcnNvbi1jaXJjbGUiIHZpZXdCb3g9IjAgMCAxNiAxNiI+Ci' +
     'AgPHBhdGggZD0iTTExIDZhMyAzIDAgMSAxLTYgMCAzIDMgMCAwIDEgNiAweiIvPgogIDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgO' +
@@ -12,8 +12,8 @@ export default function Profile() {
     <>
       <img alt="" src={placeholder} id="profile-img" />
       <div id="profile-info">
-        <div id="profile-name">TheColdPot</div>
-        <div id="profile-type">Microsoft</div>
+        <div id="profile-name">Guest</div>
+        <div id="profile-type">No account created</div>
       </div>
     </>
   )
