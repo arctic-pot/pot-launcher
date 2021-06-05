@@ -13,7 +13,10 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css']
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.svg'],
+    alias: {
+      assets: './assets'
+    }
   },
   target: 'node',
 };

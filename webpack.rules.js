@@ -24,4 +24,12 @@ module.exports = [
       }
     }
   },
+  {
+    test: /\.svgz?$/,
+    type: 'asset/inline'
+  },
+  {
+    test: /\.txt$/,
+    type: 'asset/source'
+  }
 ];

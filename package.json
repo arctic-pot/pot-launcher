@@ -80,6 +80,7 @@
     "dart-sass": "^1.25.0",
     "electron": "^13.1.1",
     "eslint": "^7.6.0",
+    "eslint-import-resolver-webpack": "^0.13.1",
     "eslint-plugin-import": "^2.20.0",
     "fork-ts-checker-webpack-plugin": "^6.0.1",
     "node-loader": "^2.0.0",
