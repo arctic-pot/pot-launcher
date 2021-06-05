@@ -88,4 +88,9 @@ typings/
 # Electron-Forge
 out/
 
+# IDE file
 .idea
+
+# Application File
+.minecraft/
+.pml/
