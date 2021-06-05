@@ -9,10 +9,10 @@ export default function TitleBar(): React.ReactElement {
       <div id="title-buttons">
         {/* eslint-disable-next-line @typescript-eslint/no-var-requires */}
         <div className="title-button" id="minimize-button">
-          <i className="bi-dash"/>
+          <i className="bi-dash" />
         </div>
         <div className="title-button" onClick={() => window.close()}>
-          <i className="bi-x"/>
+          <i className="bi-x" />
         </div>
       </div>
     </div>
