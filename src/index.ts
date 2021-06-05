@@ -30,7 +30,7 @@ const createWindow = (): void => {
     mainWindow.close();
   });
   ipcMain.on('minimize', () => {
-    mainWindow.close();
+    mainWindow.minimize();
   });
 };
 
