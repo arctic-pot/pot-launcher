@@ -1,0 +1,58 @@
+@mixin welcome-center-modal {
+  width: 100%;
+  height: calc( 100% - 30px );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div#welcome-loading {
+  @include welcome-center-modal;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+div#welcome-lang {
+  @include welcome-center-modal;
+  flex-direction: column;
+
+  & &-choose { // div#welcome-lang div#welcome-lang-choose
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    grid-template-rows: repeat(3, 50px);
+    grid-row-gap: 15px;
+    grid-column-gap: 15px;
+
+    button.chooser {
+      background-color: #27ce9d;
+      border: 2px solid #087f5b;
+      transition: background-color, box-shadow;
+      box-shadow: transparent 0 0 5px;
+      transition-duration: 0.2s;
+      cursor: pointer;
+      color: #fff;
+
+      .chooser__title {
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .chooser__subtitle {
+        font-size: 14px;
+        font-family: 'Consolas', monospace;
+      }
+
+      &.disabled {
+        cursor: default;
+        background-color: #838c93;
+        border-color: #495057;
+        opacity: 0.5;
+      }
+
+      &:not(.disabled):hover {
+        background-color: #1d9672;
+        box-shadow: #6b737b 0 0 5px;
+      }
+    }
+  }
+}

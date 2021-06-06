@@ -5,6 +5,16 @@ import App from './App';
 import PlatformError from './errors/Platform';
 import os from 'os';
 
-const isWindows = os.type().match(/Windows(_NT)?/gi);
+const isWindows = !!os.type().match(/Windows(_NT)?/gi);
 
-ReactDOM.render(React.createElement(isWindows ? App : PlatformError), document.getElementById('root'));
+if (isWindows) {
+  if (localStorage.welcomed) {
+    // shows normal page if already showed welcome page
+    ReactDOM.render(React.createElement(App), document.getElementById('root'));
+  } else {
+    // shows welcome page
+    ReactDOM.render(React.createElement(App, { welcome: true }), document.getElementById('root'));
+  }
+} else {
+  ReactDOM.render(React.createElement(PlatformError), document.getElementById('root'));
+}

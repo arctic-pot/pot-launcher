@@ -1,15 +1,23 @@
 import React from 'react';
 import TitleBar from './components/TitleBar';
 import Body from './components/Body';
-export default function App(): React.ReactElement {
+import Welcome from './welcome/Welcome';
+
+export interface IAppProps {
+  welcome?: boolean
+}
+
+export default function App(props: IAppProps): React.ReactElement {
+  // region public states
+
+  // endregion
+
+  const welcome = !!props.welcome;
+
   return (
-    // region public states
-
-    // endregion
-
     <>
       <TitleBar />
-      <Body />
+      {welcome ? <Welcome /> : <Body />}
     </>
   );
 }
