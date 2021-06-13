@@ -1,3 +1,5 @@
+@import '../style/mixins';
+
 @keyframes flyIn {
   from {
     transform: translate(0, 65px);
@@ -27,10 +29,10 @@ button#start-game-button {
   animation-duration: 1.15s;
 
   &:hover {
+    @include shadow;
     font-size: 22px;
     background-color: #20c796;
     width: 150px;
     transform: translate(0, -15px);
-    box-shadow: 0 0 5px #888888;
   }
 }
