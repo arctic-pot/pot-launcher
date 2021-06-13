@@ -37,7 +37,7 @@ div#welcome-lang {
   & &-choose {
     // div#welcome-lang div#welcome-lang-choose
     display: grid;
-    grid-template-columns: repeat(4, 150px);
+    grid-template-columns: repeat(4, 175px);
     grid-template-rows: repeat(3, 50px);
     grid-row-gap: 15px;
     grid-column-gap: 15px;
@@ -62,8 +62,8 @@ div#welcome-lang {
       }
 
       .chooser-title {
+        @include font-md;
         font-weight: 600;
-        font-size: 18px;
       }
 
       &.disabled {

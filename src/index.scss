@@ -1,6 +1,6 @@
+@charset "UTF-8";
 @import 'style/mixins';
 
-@charset "UTF-8";
 html, body {
   padding: 0;
   margin: 0;
@@ -42,7 +42,28 @@ div.error-modal {
   }
 }
 
+@mixin region-font($region-font-family) {
+  font-family: -apple-system, 'Segoe UI', $region-font-family, 'Droid Sans', sans-serif;
+}
+
 * {
   @include font-sm;
-  font-family: -apple-system, 'Segoe UI', 'Microsoft YaHei UI', 'Droid Sans', sans-serif;
+  @include region-font('Microsoft YaHei UI');
+}
+
+[lang=zh-TW],
+[lang=zh-HK],
+[lang=zh-TW] *,
+[lang=zh-HK] *,{
+  @include region-font('Microsoft JhengHei UI');
+}
+
+[lang=ja],
+[lang=ja] * {
+  @include region-font('Meiryo UI');
+}
+
+[lang=ko],
+[lang=ko] * {
+  @include region-font('Malgun Gothic');
 }
