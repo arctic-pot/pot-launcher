@@ -1,9 +1,12 @@
+@import '../style/mixins';
+
 @mixin welcome-center-modal {
   width: 100%;
   height: calc( 100% - 30px );
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 div#welcome-loading {
@@ -12,9 +15,12 @@ div#welcome-loading {
   font-weight: 600;
 }
 
+h1 {
+  @include font-lg;
+}
+
 div#welcome-lang {
   @include welcome-center-modal;
-  flex-direction: column;
 
   & &-choose { // div#welcome-lang div#welcome-lang-choose
     display: grid;
@@ -24,22 +30,17 @@ div#welcome-lang {
     grid-column-gap: 15px;
 
     button.chooser {
-      background-color: #27ce9d;
-      border: 2px solid #087f5b;
+      @include primary;
+      border: none;
       transition: background-color, box-shadow;
       box-shadow: transparent 0 0 5px;
       transition-duration: 0.2s;
       cursor: pointer;
-      color: #fff;
+      border-radius: 5px;
 
-      .chooser__title {
+      .chooser-title {
         font-weight: 600;
         font-size: 18px;
-      }
-
-      .chooser__subtitle {
-        font-size: 14px;
-        font-family: 'Consolas', monospace;
       }
 
       &.disabled {
@@ -50,9 +51,29 @@ div#welcome-lang {
       }
 
       &:not(.disabled):hover {
-        background-color: #1d9672;
-        box-shadow: #6b737b 0 0 5px;
+        background-color: #0868b8;
+        @include shadow;
       }
+    }
+  }
+}
+
+div#welcome-java {
+  @include welcome-center-modal;
+
+  button {
+    @include primary;
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color, box-shadow;
+    box-shadow: transparent 0 0 5px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0868b8;
+      @include shadow;
     }
   }
 }

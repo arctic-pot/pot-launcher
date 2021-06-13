@@ -1,0 +1,31 @@
+@mixin primary {
+  background-color: #4dabf7;
+  color: #fff
+}
+
+@mixin shadow($strength: 5px, $offset: 0px) {
+  box-shadow: $offset $offset $strength #888;
+}
+
+@mixin font-xs {
+  font-size: 14px;
+}
+
+@mixin font-sm {
+  font-size: 16px;
+}
+
+@mixin font-md {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-lg {
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin font-xl {
+  font-size: 22px;
+  -webkit-font-smoothing: antialiased;
+}

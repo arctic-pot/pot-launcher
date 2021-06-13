@@ -1,3 +1,5 @@
+@import 'style/mixins';
+
 @charset "UTF-8";
 html, body {
   padding: 0;
@@ -26,7 +28,7 @@ div.error-modal {
   flex-direction: column;
 
   h3 {
-    font-size: 22px;
+    @include font-xl;
     font-weight: 600;
     font-family: inherit;
   }
@@ -41,6 +43,6 @@ div.error-modal {
 }
 
 * {
+  @include font-sm;
   font-family: -apple-system, 'Segoe UI', 'Microsoft YaHei UI', 'Droid Sans', sans-serif;
-  font-size: 16px;
 }
