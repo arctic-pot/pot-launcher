@@ -3,5 +3,6 @@
   "account.micoroft": "Microsoft Account",
   "account.offline": "Offline",
   "account.authlib": "AuthLib Injector",
+  "account.no": "No account created",
   "start.launch": "Launch"
 }
