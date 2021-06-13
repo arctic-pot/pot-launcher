@@ -38,7 +38,7 @@ export default function LangChooser(props: PropsWithOnChoose): React.ReactElemen
       <div id="welcome-lang-choose">
         <LangChooser title="English-US" code="en-US" />
         <LangChooser title="English-UK" code="en-UK" disabled />
-        <LangChooser title="简体中文" code="zh-CN" disabled />
+        <LangChooser title="简体中文" code="zh-CN" />
         <LangChooser title="繁體中文-台灣" code="zh-TW" disabled />
         <LangChooser title="繁體中文-香港" code="zh-HK" disabled />
         <LangChooser title="Deutsche" code="de" disabled />
