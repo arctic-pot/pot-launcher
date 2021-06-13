@@ -6,7 +6,7 @@ import { IntlProvider } from 'react-intl';
 
 export interface IAppProps {
   welcome?: boolean;
-  strings?: Record<string, string>
+  strings?: Record<string, string>;
 }
 
 export default function App(props: IAppProps): React.ReactElement {
@@ -16,7 +16,7 @@ export default function App(props: IAppProps): React.ReactElement {
 
   const welcome = !!props.welcome;
   const { strings } = props;
-  console.log(strings)
+  console.log(strings);
 
   return (
     <IntlProvider locale={localStorage.locale} messages={strings}>

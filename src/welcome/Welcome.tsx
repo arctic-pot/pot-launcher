@@ -12,9 +12,7 @@ export default function Welcome(): React.ReactElement {
     // here for a nested component
     <LangChooser
       onChoose={() => {
-        setUsingComponent(
-          <JavaChooser />
-        );
+        setUsingComponent(<JavaChooser />);
       }}
     />
   );

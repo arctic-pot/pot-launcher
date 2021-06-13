@@ -2,7 +2,7 @@ import React from 'react';
 import { PropsWithOnChoose } from './Welcome';
 
 export default function LangChooser(props: PropsWithOnChoose): React.ReactElement {
-  const {onChoose} = props;
+  const { onChoose } = props;
   interface LangChooserProps {
     title: string;
     code: string;
@@ -21,7 +21,7 @@ export default function LangChooser(props: PropsWithOnChoose): React.ReactElemen
               'cdn.jsdelivr.net',
               '/gh/datapack-planet/pot-launcher/online-resources/localization/',
               props.code.toLowerCase(),
-              '/strings.json'
+              '/strings.json',
             ].join('');
             onChoose();
           }
