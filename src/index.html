@@ -12,7 +12,7 @@
         document.getElementById('minimize-button').addEventListener('click', () => {
           require('electron').ipcRenderer.send('minimize');
         });
-      }, 100);
+      }, 1000);
     </script>
     <div id="root"></div>
   </body>

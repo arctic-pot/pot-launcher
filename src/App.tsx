@@ -4,7 +4,8 @@ import Body from './components/Body';
 import Welcome from './welcome/Welcome';
 
 export interface IAppProps {
-  welcome?: boolean
+  welcome?: boolean;
+  strings?: Record<string, string>
 }
 
 export default function App(props: IAppProps): React.ReactElement {
