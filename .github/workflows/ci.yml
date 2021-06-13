@@ -30,9 +30,9 @@ jobs:
       run: npm ci
     - name: Format check
       run: |
-        (npm run format:check && echo -e "\033[32m FORMAT CHECK PASSED \033[0m") || \
-        (echo -e "\033[31m FORMAT CHECK FAILED \033[0m" && exit 1)
+        (npm run format:check && echo -e "\033[32mFORMAT CHECK PASSED\033[0m") || \
+        (echo -e "\033[31m\nFORMAT CHECK FAILED\033[0m" && exit 1)
     - name: Lint
       run: |
-        (npm run lint && echo -e "\033[32m ESLINT PASSED \033[0m") || \
-        (echo -e "\033[31m ESLINT FAILED \033[0m" && exit 1)
+        (npm run lint && echo -e "\033[32mESLINT PASSED\033[0m") || \
+        (echo -e "\033[31m\nESLINT FAILED\033[0m" && exit 1)
