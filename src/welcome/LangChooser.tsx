@@ -51,7 +51,9 @@ export default function LangChooser(props: PropsWithOnChoose): React.ReactElemen
         <LangChooser title="Español" code="es" disabled />
       </div>
       <p lang="zh-hk">
-        <br />香港特別行政區和澳門特別行政區使用的漢字標準相同<br />
+        <br />
+        香港特別行政區和澳門特別行政區使用的漢字標準相同
+        <br />
         香港、澳門、臺灣均爲中國的特別行政區
       </p>
     </div>

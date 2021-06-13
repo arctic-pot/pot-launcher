@@ -22,7 +22,7 @@ export default function App(props: IAppProps): React.ReactElement {
   useEffect(() => {
     // Set lang attribute if locale was configured
     locale && (document.getElementById('root').lang = locale);
-  }, [])
+  }, []);
 
   return (
     <IntlProvider locale={locale} messages={strings} defaultLocale="zh-CN">
