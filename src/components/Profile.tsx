@@ -6,11 +6,13 @@ import { FormattedMessage } from 'react-intl';
 export default function Profile(): React.ReactElement {
   type AccountTypes = 'no' | 'microsoft' | 'mojang' | 'offline' | 'authlib';
   const [accountType /*setAccountType*/] = useState<AccountTypes>('no');
+  const [accountName /*setAccountName*/] = useState<string>('Guest');
   return (
     <>
       <img alt="" src={profileFallback} id="profile-img" />
       <div id="profile-info">
-        <div id="profile-name">
+        <div id="profile-name">{accountName}</div>
+        <div id="profile-type">
           {
             // This code has a behavior like switch statement
             {
@@ -22,7 +24,6 @@ export default function Profile(): React.ReactElement {
             }[accountType]
           }
         </div>
-        <div id="profile-type">No account created</div>
       </div>
     </>
   );
