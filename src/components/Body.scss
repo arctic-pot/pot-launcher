@@ -38,4 +38,11 @@ div#body {
     justify-content: center;
     background-color: #d0ebff;
   }
+
+  #surface-parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
 }
