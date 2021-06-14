@@ -3,12 +3,13 @@ import './Body.scss';
 import Surface from './Surface';
 import Profile from './Profile';
 import Start from './Start';
+import Versions from './Versions';
 
 export default function Body(): React.ReactElement {
   return (
     <div id="body">
       <div id="versions-parent" className="body-part">
-        Installed Versions
+        <Versions />
       </div>
       <div id="surface-parent" className="body-part">
         <Surface />
