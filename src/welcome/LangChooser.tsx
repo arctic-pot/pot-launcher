@@ -18,7 +18,7 @@ export default function LangChooser(props: PropsWithOnChoose): React.ReactElemen
             localStorage.strings = [
               'https://',
               'cdn.jsdelivr.net',
-              '/gh/datapack-planet/pot-launcher/online-resources/localization/',
+              '/gh/datapack-planet/pot-launcher@localization/',
               props.code.toLowerCase(),
               '/strings.json',
             ].join('');
