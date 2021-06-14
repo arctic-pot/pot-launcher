@@ -1,11 +1,20 @@
 @import '../style/mixins';
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
 .surface-button {
   @include primary;
   @include shadow;
   transition-property: box-shadow, height, width, background-color;
+  opacity: 0;
   transition-duration: 0.25s;
-  opacity: 0.9;
   background-color: #22b8cf;
   cursor: pointer;
   height: 37.5%;
@@ -14,7 +23,16 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 11.4514px;
+  animation-name: fadeIn;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+
+  @for $i from 1 through 3 {
+    &:nth-child(#{$i}) {
+      animation-delay: ($i - 1) * 0.2s + 0.3s;
+    }
+  }
 
   & &-icon * {
     font-size: 27.5px;
