@@ -13,7 +13,7 @@ export default function JavaChooser(): React.ReactElement {
         } else {
           setIsInstalledJava(false);
         }
-        }
+      }
     });
   }, []);
   if (isInstalledJava !== undefined) {
