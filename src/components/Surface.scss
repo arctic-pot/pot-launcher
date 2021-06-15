@@ -17,8 +17,8 @@
   transition-duration: 0.25s;
   background-color: #22b8cf;
   cursor: pointer;
-  height: 37.5%;
-  width: 20%;
+  height: 25.5%;
+  width: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,7 @@
   animation-duration: 0.6s;
   animation-fill-mode: forwards;
 
-  @for $i from 1 through 3 {
+  @for $i from 1 through 4 {
     &:nth-child(#{$i}) {
       animation-delay: ($i - 1) * 0.2s + 0.3s;
     }
@@ -39,14 +39,14 @@
   }
 
   & &-text {
-    @include font-lg;
+    //@include font-lg;
     font-weight: 600;
   }
 
   &:hover {
     @include primary;
     @include shadow;
-    height: 42.5%;
-    width: 21%;
+    height: 32.5%;
+    width: 17.75%;
   }
 }

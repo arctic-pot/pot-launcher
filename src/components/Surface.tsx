@@ -21,6 +21,7 @@ export default function Surface(): React.ReactElement {
     <>
       <SurfaceButton text="settings.title" icon={<i className="bi-gear" />} />
       <SurfaceButton text="nat.title" icon={<i className="bi-hdd-network" />} />
+      <SurfaceButton text="download.title" icon={<i className="bi-box-seam" />} />
       <SurfaceButton text="social.title" icon={<i className="bi-people" />} />
     </>
   );
