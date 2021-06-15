@@ -7,11 +7,13 @@ export default function JavaChooser(): React.ReactElement {
     childProcess.exec('java -version', (error, _out, out) => {
       if (error) {
         setIsInstalledJava(false);
-      } else if (out.match(/1\.(8|16)\.[0-9]+(_[0-9]+)?/)) {
-        setIsInstalledJava(true);
       } else {
-        setIsInstalledJava(false);
-      }
+        if (out.match(/(16\.[0-9]+\.[0-9]+)|(1\.8\.[0-9]+(_[0-9]+)?)/)) {
+          setIsInstalledJava(true);
+        } else {
+          setIsInstalledJava(false);
+        }
+        }
     });
   }, []);
   if (isInstalledJava !== undefined) {
