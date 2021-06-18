@@ -15,7 +15,6 @@
   transition-property: box-shadow, height, width, background-color;
   opacity: 0;
   transition-duration: 0.25s;
-  background-color: #22b8cf;
   cursor: pointer;
   height: 25.5%;
   width: 15%;
@@ -44,8 +43,8 @@
   }
 
   &:hover {
-    @include primary;
     @include shadow;
+    background-color: #0868b8;
     height: 32.5%;
     width: 17.75%;
   }
