@@ -1,3 +1,5 @@
+@import '../style/mixins';
+
 div#body {
   width: 100%;
   height: calc( 100% - 30px );
@@ -10,6 +12,7 @@ div#body {
   }
 
   #profile-parent {
+    z-index: 99;
     display: flex;
     box-sizing: border-box;
     padding: 5px;
@@ -29,6 +32,10 @@ div#body {
       background-color: #b4dcfc;
       z-index: 9999;
       // box-shadow: 0 0 5px #888888;
+    }
+
+    &:active {
+      background-color: #8ac9fa;
     }
   }
 

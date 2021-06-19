@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import PlatformError from './errors/Platform';
 import os from 'os';
+import 'animate.css/animate.compat.css';
 
 const isWindows = !!os.type().match(/Windows(_NT)?/gi);
 

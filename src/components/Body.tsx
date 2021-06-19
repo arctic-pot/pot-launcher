@@ -4,7 +4,7 @@ import Surface from './Surface';
 import Profile from './Profile';
 import Start from './Start';
 import Versions from './Versions';
-import { HashRouter } from 'react-router-dom';
+import { HashRouter, Link } from 'react-router-dom';
 
 export default function Body(): React.ReactElement {
   return (
@@ -16,9 +16,11 @@ export default function Body(): React.ReactElement {
         <div id="surface-parent" className="body-part">
           <Surface />
         </div>
-        <div id="profile-parent" className="body-part">
-          <Profile />
-        </div>
+        <Link to="/account">
+          <div id="profile-parent" className="body-part">
+            <Profile />
+          </div>
+        </Link>
         <div id="start-parent" className="body-part">
           <Start />
         </div>

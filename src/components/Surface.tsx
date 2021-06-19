@@ -2,6 +2,11 @@ import React from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
 import './Surface.scss';
 import { FormattedMessage } from 'react-intl';
+import Home from './secondary/Home';
+import Download from './secondary/Download';
+import Account from './secondary/Account';
+import ComingSoon from './secondary/ComingSoon';
+import Settings from './secondary/Settings';
 
 export enum SurfaceApps {
   home,
@@ -41,7 +46,7 @@ export default function Surface(): React.ReactElement {
       <nav id="surface-nav">
         <SurfaceButton appPath="/" appId={SurfaceApps.home} text="home.title" iconName="bi-house" />
         <SurfaceButton appPath="/download" appId={SurfaceApps.download} text="download.title" iconName="bi-download" />
-        <SurfaceButton appPath="/profile" appId={SurfaceApps.social} text="profile.title" iconName="bi-person" />
+        <SurfaceButton appPath="/account" appId={SurfaceApps.social} text="profile.title" iconName="bi-person" />
         <SurfaceButton appPath="/server" appId={SurfaceApps.server} text="server.title" iconName="bi-hdd" />
         <SurfaceButton appPath="/nat" appId={SurfaceApps.nat} text="nat.title" iconName="bi-hdd-network" />
         <SurfaceButton appPath="/settings" appId={SurfaceApps.settings} text="settings.title" iconName="bi-gear" />
@@ -49,22 +54,22 @@ export default function Surface(): React.ReactElement {
       <section id="surface-app">
         <Switch>
           <Route path="/" exact>
-            Home
+            <Home />
           </Route>
           <Route path="/download" exact>
-            Download
+            <Download />
           </Route>
-          <Route path="/profile" exact>
-            Profile
+          <Route path="/account" exact>
+            <Account />
           </Route>
           <Route path="/server" exact>
-            Server
+            <ComingSoon />
           </Route>
           <Route path="/nat" exact>
-            NAT
+            <ComingSoon />
           </Route>
           <Route path="/settings" exact>
-            Settings
+            <Settings />
           </Route>
         </Switch>
       </section>

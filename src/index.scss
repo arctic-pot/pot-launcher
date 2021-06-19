@@ -42,6 +42,11 @@ div.error-modal {
   }
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 @mixin region-font($region-font-family) {
   font-family: -apple-system, 'Segoe UI', $region-font-family, 'Droid Sans', sans-serif;
 }
