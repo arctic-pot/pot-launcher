@@ -1,28 +1,73 @@
 import React from 'react';
+import { Link, Switch, Route } from 'react-router-dom';
 import './Surface.scss';
 import { FormattedMessage } from 'react-intl';
 
+export enum SurfaceApps {
+  home,
+  download,
+  social,
+  server,
+  nat,
+  settings,
+}
+
 export default function Surface(): React.ReactElement {
   interface SurfaceButtonProps {
-    icon?: React.ReactElement;
+    iconName?: string;
     text: string;
+    pinned?: boolean;
+    appId: number;
+    appPath: string;
   }
+
   function SurfaceButton(props: SurfaceButtonProps) {
     return (
-      <div className="surface-button">
-        <div className="surface-button-icon">{props.icon}</div>
-        <div className="surface-button-text">
-          <FormattedMessage id={props.text} />
+      <Link to={props.appPath} style={{ color: '#000' }}>
+        <div className="surface-button">
+          <div className="surface-button-icon">
+            <i className={props.iconName} />
+          </div>
+          <div className="surface-button-text">
+            <FormattedMessage id={props.text} />
+          </div>
         </div>
-      </div>
+      </Link>
     );
   }
+
   return (
     <>
-      <SurfaceButton text="settings.title" icon={<i className="bi-gear" />} />
-      <SurfaceButton text="nat.title" icon={<i className="bi-hdd-network" />} />
-      <SurfaceButton text="download.title" icon={<i className="bi-box-seam" />} />
-      <SurfaceButton text="social.title" icon={<i className="bi-people" />} />
+      <nav id="surface-nav">
+        <SurfaceButton appPath="/" appId={SurfaceApps.home} text="home.title" iconName="bi-house" />
+        <SurfaceButton appPath="/download" appId={SurfaceApps.download} text="download.title" iconName="bi-download" />
+        <SurfaceButton appPath="/profile" appId={SurfaceApps.social} text="profile.title" iconName="bi-person" />
+        <SurfaceButton appPath="/server" appId={SurfaceApps.server} text="server.title" iconName="bi-hdd" />
+        <SurfaceButton appPath="/nat" appId={SurfaceApps.nat} text="nat.title" iconName="bi-hdd-network" />
+        <SurfaceButton appPath="/settings" appId={SurfaceApps.settings} text="settings.title" iconName="bi-gear" />
+      </nav>
+      <section id="surface-app">
+        <Switch>
+          <Route path="/" exact>
+            Home
+          </Route>
+          <Route path="/download" exact>
+            Download
+          </Route>
+          <Route path="/profile" exact>
+            Profile
+          </Route>
+          <Route path="/server" exact>
+            Server
+          </Route>
+          <Route path="/nat" exact>
+            NAT
+          </Route>
+          <Route path="/settings" exact>
+            Settings
+          </Route>
+        </Switch>
+      </section>
     </>
   );
 }

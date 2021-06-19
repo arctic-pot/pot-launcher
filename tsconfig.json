@@ -14,7 +14,10 @@
     "paths": {
       "*": ["node_modules/*"],
       "assets": ["./assets"]
-    }
+    },
+    "types": [
+      "react-router-dom"
+    ]
   },
   "include": [
     "src/**/*"
