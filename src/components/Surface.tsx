@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import Home from './secondary/Home';
 import Download from './secondary/Download';
 import Account from './secondary/Account';
-import ComingSoon from './secondary/ComingSoon';
 import Settings from './secondary/Settings';
 
 export enum SurfaceApps {
@@ -63,10 +62,8 @@ export default function Surface(): React.ReactElement {
             <Account />
           </Route>
           <Route path="/server" exact>
-            <ComingSoon />
           </Route>
           <Route path="/nat" exact>
-            <ComingSoon />
           </Route>
           <Route path="/settings" exact>
             <Settings />
