@@ -11,29 +11,36 @@
   }
 }
 
-button#start-game-button {
-  border-radius: 10px;
-  font-size: 20px;
-  width: 135px;
-  height: 45px;
-  cursor: pointer;
-  border: none;
-  background-color: #339af0;
-  transition-property: border, background-color, transform, box-shadow, width, font-size;
-  transition-duration: 0.2s;
-  transform: translate(0, -10px);
-  box-shadow: 0 0 5px transparent;
-  font-weight: 600;
-  color: #fff;
-  animation-name: flyIn;
-  animation-timing-function: ease-out;
-  animation-duration: 1.15s;
+#start-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d0ebff;
 
-  &:hover {
-    @include shadow;
-    font-size: 22px;
-    background-color: #20c796;
-    width: 150px;
-    transform: translate(0, -15px);
+  button#start-game-button {
+    border-radius: 3px;
+    font-size: 20px;
+    width: 135px;
+    height: 45px;
+    cursor: pointer;
+    border: none;
+    background-color: #339af0;
+    transition-property: border, background-color, transform, box-shadow, width, font-size;
+    transition-duration: 0.2s;
+    transform: translate(0, -10px);
+    box-shadow: 0 0 5px transparent;
+    font-weight: 600;
+    color: #fff;
+    animation-name: flyIn;
+    animation-timing-function: ease-out;
+    animation-duration: 1.15s;
+
+    &:hover {
+      @include shadow;
+      font-size: 22px;
+      background-color: #20c796;
+      width: 150px;
+      transform: translate(0, -15px);
+    }
   }
 }

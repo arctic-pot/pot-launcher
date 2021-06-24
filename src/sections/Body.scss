@@ -10,44 +10,4 @@ main#body {
   .body-part {
     box-sizing: border-box;
   }
-
-  #profile-parent {
-    z-index: 99;
-    display: flex;
-    box-sizing: border-box;
-    padding: 5px;
-    background-color: #d0ebff;
-    transition-property: background-color, box-shadow;
-    transition-duration: 0.2s;
-    cursor: pointer;
-    // box-shadow: 0 0 5px transparent;
-
-    img#profile-img {
-      width: 40px;  // 16x2.25
-      height: 40px; // 16x2.25
-      margin-right: 10px;
-    }
-
-    &:hover {
-      background-color: #b4dcfc;
-      z-index: 9999;
-      // box-shadow: 0 0 5px #888888;
-    }
-
-    &:active {
-      background-color: #8ac9fa;
-    }
-  }
-
-  #start-parent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #d0ebff;
-  }
-
-  #surface-parent {
-    display: flex;
-    flex-direction: column;
-  }
 }

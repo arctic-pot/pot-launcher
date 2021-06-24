@@ -19,12 +19,14 @@ div#title-bar {
     -webkit-app-region: no-drag;
 
     div.title-button {
+      border-radius: 3px;
       box-sizing: border-box;
       padding: 0 5px;
       transition-property: background-color;
       transition-duration: 0.2s;
       cursor: pointer;
       width: 30px;
+      height: 30px;
       text-align: center;
 
       &:hover {
