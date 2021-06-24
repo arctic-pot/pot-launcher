@@ -72,3 +72,7 @@ a {
 [lang=ko] * {
   @include region-font('Malgun Gothic');
 }
+
+.shadow {
+  @include shadow;
+}
