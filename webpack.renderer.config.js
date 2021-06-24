@@ -1,6 +1,7 @@
 /* eslint-disable */
 const rules = require('./webpack.rules');
 const plugins = require('./webpack.plugins');
+const resolve = require('path').resolve
 
 rules.push({
   test: /\.s?[ca]ss$/,
@@ -15,7 +16,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.svg'],
     alias: {
-      assets: './assets'
+      'assets': resolve('./assets'),
+      'components': resolve('./src/components'),
     }
   },
   target: 'node',

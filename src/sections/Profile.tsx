@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Profile.scss';
-import profileFallback from '../../assets/img/profile-fallback.svg';
+import profileFallback from 'assets/img/profile-fallback.svg';
 import { FormattedMessage } from 'react-intl';
 
 export default function Profile(): React.ReactElement {
