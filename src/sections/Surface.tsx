@@ -6,7 +6,6 @@ import Home from './secondary/Home';
 import Download from './secondary/Download';
 import Account from './secondary/Account';
 import Settings from './secondary/Settings';
-import About from './secondary/About';
 
 export enum SurfaceApps {
   home,
@@ -50,7 +49,6 @@ export default function Surface(): React.ReactElement {
         <Pivot appPath="/account" appId={SurfaceApps.social} text="profile.title" iconName="bi-person" />
         <Pivot appPath="/server" appId={SurfaceApps.server} text="server.title" iconName="bi-hdd" />
         <Pivot appPath="/nat" appId={SurfaceApps.nat} text="nat.title" iconName="bi-hdd-network" />
-        <Pivot appPath="/about" appId={SurfaceApps.about} text="about.title" iconName="bi-three-dots" />
         <Pivot appPath="/settings" appId={SurfaceApps.settings} text="settings.title" iconName="bi-gear" />
       </nav>
       <section id="surface-app">
@@ -69,9 +67,6 @@ export default function Surface(): React.ReactElement {
           </Route>
           <Route path="/nat" exact>
             -
-          </Route>
-          <Route path="/about" exact>
-            <About />
           </Route>
           <Route path="/settings" exact>
             <Settings />
