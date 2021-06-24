@@ -27,7 +27,7 @@ export default function Surface(): React.ReactElement {
     appPath: string;
   }
 
-  function SurfaceButton(props: SurfaceButtonProps) {
+  function Pivot(props: SurfaceButtonProps) {
     return (
       <Link to={props.appPath} style={{ color: '#000' }}>
         <div className="surface-button">
@@ -45,13 +45,13 @@ export default function Surface(): React.ReactElement {
   return (
     <>
       <nav id="surface-nav">
-        <SurfaceButton appPath="/" appId={SurfaceApps.home} text="home.title" iconName="bi-house" />
-        <SurfaceButton appPath="/download" appId={SurfaceApps.download} text="download.title" iconName="bi-download" />
-        <SurfaceButton appPath="/account" appId={SurfaceApps.social} text="profile.title" iconName="bi-person" />
-        <SurfaceButton appPath="/server" appId={SurfaceApps.server} text="server.title" iconName="bi-hdd" />
-        <SurfaceButton appPath="/nat" appId={SurfaceApps.nat} text="nat.title" iconName="bi-hdd-network" />
-        <SurfaceButton appPath="/about" appId={SurfaceApps.about} text="about.title" iconName="bi-three-dots" />
-        <SurfaceButton appPath="/settings" appId={SurfaceApps.settings} text="settings.title" iconName="bi-gear" />
+        <Pivot appPath="/" appId={SurfaceApps.home} text="home.title" iconName="bi-house" />
+        <Pivot appPath="/download" appId={SurfaceApps.download} text="download.title" iconName="bi-download" />
+        <Pivot appPath="/account" appId={SurfaceApps.social} text="profile.title" iconName="bi-person" />
+        <Pivot appPath="/server" appId={SurfaceApps.server} text="server.title" iconName="bi-hdd" />
+        <Pivot appPath="/nat" appId={SurfaceApps.nat} text="nat.title" iconName="bi-hdd-network" />
+        <Pivot appPath="/about" appId={SurfaceApps.about} text="about.title" iconName="bi-three-dots" />
+        <Pivot appPath="/settings" appId={SurfaceApps.settings} text="settings.title" iconName="bi-gear" />
       </nav>
       <section id="surface-app">
         <Switch>
