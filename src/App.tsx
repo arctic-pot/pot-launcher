@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import TitleBar from './components/TitleBar';
-import Body from './components/Body';
+import TitleBar from './sections/TitleBar';
+import Body from './sections/Body';
 import Welcome from './welcome/Welcome';
 import { IntlProvider } from 'react-intl';
 

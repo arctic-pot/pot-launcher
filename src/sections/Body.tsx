@@ -9,7 +9,7 @@ import { HashRouter, Link } from 'react-router-dom';
 export default function Body(): React.ReactElement {
   return (
     <HashRouter>
-      <div id="body">
+      <main id="body">
         <div id="versions-parent" className="body-part">
           <Versions />
         </div>
@@ -24,7 +24,7 @@ export default function Body(): React.ReactElement {
         <div id="start-parent" className="body-part">
           <Start />
         </div>
-      </div>
+      </main>
     </HashRouter>
   );
 }
