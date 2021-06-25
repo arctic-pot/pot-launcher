@@ -18,6 +18,7 @@ module.exports = {
     alias: {
       'assets': resolve('./assets'),
       'components': resolve('./src/components'),
+      'utils': resolve('./src/utils'),
     }
   },
   target: 'node',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Size } from './@types/enums';
-import classnames from '../utils/classnames';
+import classnames from 'utils/classnames';
 
 interface ButtonProps {
   primary?: boolean;
