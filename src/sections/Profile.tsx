@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './Profile.scss';
 import profileFallback from 'assets/img/profile-fallback.svg';
 import { FormattedMessage } from 'react-intl';
