@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Profile.scss';
 import profileFallback from 'assets/img/profile-fallback.svg';
 import { FormattedMessage } from 'react-intl';
+import { PublicStates } from '../App';
 
 export default function Profile(): React.ReactElement {
-  type AccountTypes = 'no' | 'microsoft' | 'mojang' | 'offline' | 'authlib';
-  const [accountType /*setAccountType*/] = useState<AccountTypes>('no');
-  const [accountName /*setAccountName*/] = useState<string>('Guest');
+  const { accountName, accountType } = useContext(PublicStates);
+
   return (
     <>
       <img alt="" src={profileFallback} id="profile-img" />
@@ -15,13 +15,13 @@ export default function Profile(): React.ReactElement {
         <div id="profile-type">
           {
             // This code has a behavior like switch statement
-            {
-              no: <FormattedMessage id="account.no" />,
-              microsoft: <FormattedMessage id="account.microsoft" />,
-              mojang: <FormattedMessage id="account.mojang" />,
-              offline: <FormattedMessage id="account.offline" />,
-              authlib: <FormattedMessage id="account.authlib" />,
-            }[accountType]
+            [
+              <FormattedMessage id="account.no" />,
+              <FormattedMessage id="account.microsoft" />,
+              <FormattedMessage id="account.mojang" />,
+              <FormattedMessage id="account.offline" />,
+              <FormattedMessage id="account.authlib" />,
+            ][accountType as number]
           }
         </div>
       </div>

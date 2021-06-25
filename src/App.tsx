@@ -1,17 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TitleBar from './sections/TitleBar';
 import Body from './sections/Body';
 import Welcome from './welcome/Welcome';
 import { IntlProvider } from 'react-intl';
+
+// region type declarations
+export enum AccountType {
+  no,
+  microsoft,
+  mojang,
+  offline,
+  injector,
+}
+
+type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export interface IAppProps {
   welcome?: boolean;
   strings?: Record<string, string>;
 }
 
+interface IStateContext {
+  accountName?: string;
+  accountType?: AccountType;
+  setAccountName?: StateSetter<string>;
+  setAccountType?: StateSetter<AccountType>;
+}
+// endregion
+
+export const PublicStates = React.createContext<IStateContext>({});
+
 export default function App(props: IAppProps): React.ReactElement {
   // region public states
+  const [accountType, setAccountType] = useState<AccountType>(localStorage.accountType ?? AccountType.no);
+  const [accountName, setAccountName] = useState<string>('Guest');
+  // endregion
 
+  // region account saver
+  useEffect(() => {
+    localStorage.accountType = accountName;
+    localStorage.accountName = accountName;
+  }, [accountType, accountName]);
   // endregion
 
   const welcome = !!props.welcome;
@@ -25,9 +54,11 @@ export default function App(props: IAppProps): React.ReactElement {
   }, []);
 
   return (
-    <IntlProvider locale={locale} messages={strings} defaultLocale="zh-CN">
-      <TitleBar />
-      {welcome ? <Welcome /> : <Body />}
-    </IntlProvider>
+    <PublicStates.Provider value={{ accountName, accountType, setAccountName, setAccountType }}>
+      <IntlProvider locale={locale} messages={strings} defaultLocale="zh-CN">
+        <TitleBar />
+        {welcome ? <Welcome /> : <Body />}
+      </IntlProvider>
+    </PublicStates.Provider>
   );
 }
