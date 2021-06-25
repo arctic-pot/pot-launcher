@@ -38,7 +38,7 @@ export default function App(props: IAppProps): React.ReactElement {
 
   // region account saver
   useEffect(() => {
-    localStorage.accountType = accountName;
+    localStorage.accountType = accountType;
     localStorage.accountName = accountName;
   }, [accountType, accountName]);
   // endregion
