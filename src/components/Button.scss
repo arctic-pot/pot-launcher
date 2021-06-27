@@ -5,17 +5,23 @@ button.button {
   cursor: pointer;
   border: 1px solid #6b737b;
   background-color: #fff;
-  transition-property: background-color;
+  transition-property: background-color, border;
   transition-duration: 0.195s;
   font-weight: 600;
-  padding: 1.5px 6px;
+  padding: 5px 7px;
+
+  &:hover {
+    border: 1px solid #4dabf7;
+    background-color: #e7f5ff;
+  }
 
   &.button-primary {
     @include primary;
-    border: none;
+    border: 1px solid #1971c2;
 
     &:hover {
       background-color: #1971c2;
+      border: 1px solid #1971c2;
     }
   }
 }

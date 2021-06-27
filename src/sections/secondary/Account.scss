@@ -1,0 +1,47 @@
+div#page-account {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  div#account-list {
+    width: 60%;
+  }
+
+  div#account-create {
+    width: 40%;
+    box-shadow: -7px 0 7px -7px #adb5bd;
+
+    &>div {
+      width: 100%;
+      height: 100%;
+    }
+
+    div#account-create-choose-type-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+
+      button, input, label, div {
+        width: 200px;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+.account-container-enter {
+  opacity: 0;
+}
+.account-container-enter-active {
+  opacity: 1;
+  transition: opacity 2000ms;
+}
+.account-container-exit {
+  opacity: 1;
+}
+.account-container-exit-active {
+  opacity: 0;
+  transition: opacity 2000ms;
+}
