@@ -27,7 +27,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: npm ci
+      run: npm install
     - name: Format check
       run: |
         (npm run format:check && echo -e "\033[32mFORMAT CHECK PASSED\033[0m") || \
