@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './Account.scss';
 import { FormattedMessage } from 'react-intl';
-import Button from 'components/Button';
-import Input from 'components/Input';
+import { Button, TextField } from '@material-ui/core';
 
 export default function Account(): React.ReactElement {
   enum AccountCreatePage {
@@ -26,16 +25,16 @@ export default function Account(): React.ReactElement {
       <>
         {accountCreatePage === AccountCreatePage.chooseType && (
           <div id="account-create-choose-type-container" className="">
-            <Button onClick={pageSetter(AccountCreatePage.mojang)}>
+            <Button variant="outlined" onClick={pageSetter(AccountCreatePage.mojang)}>
               <FormattedMessage id="account.mojang" />
             </Button>
-            <Button onClick={pageSetter(AccountCreatePage.ms)}>
+            <Button variant="outlined" onClick={pageSetter(AccountCreatePage.ms)}>
               <FormattedMessage id="account.microsoft" />
             </Button>
-            <Button onClick={pageSetter(AccountCreatePage.offline)}>
+            <Button variant="outlined" onClick={pageSetter(AccountCreatePage.offline)}>
               <FormattedMessage id="account.offline" />
             </Button>
-            <Button onClick={pageSetter(AccountCreatePage.injector)}>
+            <Button variant="outlined" onClick={pageSetter(AccountCreatePage.injector)}>
               <FormattedMessage id="account.authlib" />
             </Button>
           </div>
@@ -45,24 +44,24 @@ export default function Account(): React.ReactElement {
             <h1>
               <FormattedMessage id="account.mojang" />
             </h1>
-            <Input placeholder="Email" label="Email" />
-            <Input placeholder="Password" type="password" label="Password" />
+            <TextField placeholder="Email" label="Email" />
+            <TextField placeholder="Password" type="password" label="Password" />
             <br />
-            <Button primary>Login</Button>
-            <Button onClick={pageSetter(AccountCreatePage.chooseType)}>Cancel</Button>
+            <Button variant="contained" color="primary">Login</Button>
+            <Button variant="outlined" onClick={pageSetter(AccountCreatePage.chooseType)}>Cancel</Button>
           </div>
         )}
         {accountCreatePage === AccountCreatePage.ms && (
           <div id="account-create-choose-type-container" className="">
             <div>We are going to open a new window to let you sign</div>
-            <Button onClick={pageSetter(AccountCreatePage.chooseType)}>Cancel</Button>
+            <Button variant="outlined" onClick={pageSetter(AccountCreatePage.chooseType)}>Cancel</Button>
           </div>
         )}
         {accountCreatePage === AccountCreatePage.offline && (
           <div id="account-create-choose-type-container" className="">
-            <Input label="Name" placeholder="Name" />
+            <TextField label="Name" placeholder="Name" />
             <br />
-            <Button onClick={pageSetter(AccountCreatePage.chooseType)}>Cancel</Button>
+            <Button variant="outlined" onClick={pageSetter(AccountCreatePage.chooseType)}>Cancel</Button>
           </div>
         )}
       </>
