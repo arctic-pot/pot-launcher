@@ -1,0 +1,11 @@
+{
+  "account.mojang": "Mojang 账号",
+  "account.micoroft": "Microsoft 账号",
+  "account.offline": "离线账号",
+  "account.authlib": "外置登录",
+  "home.title": "主页",
+  "server.title": "服务器",
+  "tool.title": "工具箱",
+  "mods.title": "Mods",
+  "settings.title": "设置"
+}

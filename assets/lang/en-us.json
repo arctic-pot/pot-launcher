@@ -1,8 +1,11 @@
 {
   "account.mojang": "Mojang Account",
   "account.micoroft": "Microsoft Account",
-  "account.offline": "Offline",
+  "account.offline": "Offline Account",
   "account.authlib": "AuthLib Injector",
   "home.title": "Home",
+  "server.title": "Server",
+  "tool.title": "Toolbox",
+  "mods.title": "Mods",
   "settings.title": "Settings"
 }

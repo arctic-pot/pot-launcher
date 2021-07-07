@@ -1,2 +1,2 @@
 // import another file to load
-import './RenderReact'
+import './RenderReact';

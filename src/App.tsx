@@ -38,15 +38,10 @@ const theme = createMuiTheme({
     primary: localStorage.color ?? blue,
   },
   typography: {
-    fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif'
-    ].join(', '),
-  }
+    fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(
+      ', '
+    ),
+  },
 });
 
 // use this to share public state to its children elements
