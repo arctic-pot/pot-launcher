@@ -1,22 +1,42 @@
 import React from 'react';
-import './TitleBar.scss';
+import { AppBar, Toolbar, Typography, makeStyles, createStyles, IconButton } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/CloseRounded';
+import MinimizeIcon from '@material-ui/icons/RemoveRounded';
+import RefreshIcon from '@material-ui/icons/RefreshRounded';
+import './Body.scss';
+import info from 'assets/versionList.json';
 
-export default function TitleBar(): React.ReactElement {
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    title: {
+      flexGrow: 1,
+    },
+  })
+);
+
+export default function (): React.ReactElement {
+  const classes = useStyles();
   return (
-    <div id="title-bar">
-      <span id="title">Pot Minecraft Launcher</span>
-      <div id="title-buttons">
-        {/* eslint-disable-next-line @typescript-eslint/no-var-requires */}
-        <div className="title-button" onClick={() => location.reload()} title="Reload">
-          <i className="bi-arrow-clockwise" />
-        </div>
-        <div className="title-button" id="minimize-button" title="Minimize">
-          <i className="bi-dash" />
-        </div>
-        <div className="title-button" onClick={() => window.close()} title="Close">
-          <i className="bi-x" />
-        </div>
-      </div>
-    </div>
+    <>
+      <AppBar position="static" className="title-bar">
+        <Toolbar variant="dense">
+          <Typography variant="h6" className={classes.title}>
+            Pot Minecraft Launcher {info.versionMajor > 1 && info.versionRoman} {info.beta && 'BETA'}
+          </Typography>
+          <IconButton color="inherit" className="title-bar-action" onClick={() => location.reload()}>
+            <RefreshIcon />
+          </IconButton>
+          <IconButton color="inherit" className="title-bar-action" id="minimize-button">
+            <MinimizeIcon />
+          </IconButton>
+          <IconButton color="inherit" className="title-bar-action" id="close-button">
+            <CloseIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }

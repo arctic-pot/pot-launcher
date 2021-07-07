@@ -1,13 +1,8 @@
-@import '../style/mixins';
+.title-bar {
+  -webkit-app-region: drag;
+}
 
-main#body {
-  width: 100%;
-  height: calc( 100% - 30px );
-  display: grid;
-  grid-template-rows: 460px 50px;
-  grid-template-columns: 200px 760px;
-
-  .body-part {
-    box-sizing: border-box;
-  }
+.title-bar-action {
+  -webkit-app-region: no-drag;
+  margin-left: 5px;
 }

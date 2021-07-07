@@ -27,11 +27,12 @@ const createWindow = (): void => {
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
-  ipcMain.on('close', () => {
-    mainWindow.close();
-  });
   ipcMain.on('minimize', () => {
     mainWindow.minimize();
+  });
+
+  ipcMain.on('close', () => {
+    mainWindow.close();
   });
 };
 

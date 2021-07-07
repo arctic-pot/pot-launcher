@@ -48,8 +48,14 @@ a {
 }
 
 @mixin region-font($region-font-family) {
-  font-family: -apple-system, 'Segoe UI', $region-font-family, 'Droid Sans', sans-serif;
+  font-family: -apple-system, 'Roboto', 'Segoe UI', $region-font-family, 'Droid Sans', sans-serif;
 }
+
+.no-drag {
+  -webkit-app-region: no-drag;
+  margin-left: 5px;
+}
+
 
 * {
   @include font-sm;

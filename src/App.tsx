@@ -3,6 +3,9 @@ import TitleBar from './sections/TitleBar';
 import Body from './sections/Body';
 import Welcome from './welcome/Welcome';
 import { IntlProvider } from 'react-intl';
+import { ThemeProvider } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
 
 // region type declarations
 export enum AccountType {
@@ -27,6 +30,22 @@ interface IStateContext {
   setAccountType?: StateSetter<AccountType>;
 }
 // endregion
+
+const theme = createMuiTheme({
+  palette: {
+    primary: localStorage.color ?? blue,
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif'
+    ].join(', '),
+  }
+});
 
 export const PublicStates = React.createContext<IStateContext>({});
 
@@ -56,8 +75,10 @@ export default function App(props: IAppProps): React.ReactElement {
   return (
     <PublicStates.Provider value={{ accountName, accountType, setAccountName, setAccountType }}>
       <IntlProvider locale={locale} messages={strings} defaultLocale="zh-CN">
-        <TitleBar />
-        {welcome ? <Welcome /> : <Body />}
+        <ThemeProvider theme={theme}>
+          <TitleBar />
+          {welcome ? <Welcome /> : <Body />}
+        </ThemeProvider>
       </IntlProvider>
     </PublicStates.Provider>
   );
