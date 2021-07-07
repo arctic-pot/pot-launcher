@@ -6,17 +6,20 @@ import PlatformError from './errors/Platform';
 import os from 'os';
 import 'animate.css/animate.compat.css';
 
+import en_us from 'assets/lang/en-us.json';
+
 // Remove this in the future
 const isWindows = !!os.type().match(/Windows(_NT)?/gi);
 
 if (isWindows) {
   if (localStorage.welcomed) {
     // shows normal page if already showed welcome page
-    fetch(localStorage.strings)
-      .then((response) => response.json())
-      .then((strings) => {
-        ReactDOM.render(React.createElement(App, { strings: strings }), document.getElementById('root'));
-      });
+    const strings = (
+      {
+        'en-US': en_us,
+      } as unknown as Record<string, Record<string, string>>
+    )[localStorage.locale];
+    ReactDOM.render(React.createElement(App, { strings: strings }), document.getElementById('root'));
   } else {
     // shows welcome page
     ReactDOM.render(React.createElement(App, { welcome: true }), document.getElementById('root'));

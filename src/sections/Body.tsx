@@ -11,7 +11,7 @@ export default function (): React.ReactElement {
   return (
     <>
       <Tabs centered value={openingTab} onChange={handleChange} indicatorColor="primary" textColor="primary">
-        <Tab label="Home" />
+        <Tab label={<FormattedMessage id="home.title" />} />
         <Tab label={<FormattedMessage id="settings.title" />} />
       </Tabs>
     </>
