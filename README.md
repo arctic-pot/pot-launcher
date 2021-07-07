@@ -1,4 +1,4 @@
-### <p align="center">Pot Launcher</p>
+# <p align="center">Pot Launcher</p>
 
 <p align="center">The modern and concise Minecraft launcher for developers and players </p>
 
@@ -15,6 +15,12 @@ No plugin interface - but the original launcher is OK
 - Manage mods
 - Manage resource packs
 - Manage Map NBT
+
+## About
+
+Pot launcher is a TechPot International Project built with electron & react
+
+Used UI framework of Material UI
 
 ## Disclaimers
 
