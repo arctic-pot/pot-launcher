@@ -24,6 +24,8 @@ export default function (): React.ReactElement {
       <AppBar position="static" className="title-bar">
         <Toolbar variant="dense">
           <Typography variant="h6" className={classes.title}>
+            {/* if version more than 1, show roman version, if in beta, show "BETA" */}
+            {/* whitespaces that more than 1 will be zip to 1 in browser */}
             Pot Minecraft Launcher {info.versionMajor > 1 && info.versionRoman} {info.beta && 'BETA'}
           </Typography>
           <IconButton color="inherit" className="title-bar-action" onClick={() => location.reload()}>

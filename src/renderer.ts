@@ -2,28 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
-import PlatformError from './errors/Platform';
-import os from 'os';
 import 'animate.css/animate.compat.css';
 
 import en_us from 'assets/lang/en-us.json';
 
-// Remove this in the future
-const isWindows = !!os.type().match(/Windows(_NT)?/gi);
-
-if (isWindows) {
-  if (localStorage.welcomed) {
-    // shows normal page if already showed welcome page
-    const strings = (
-      {
-        'en-US': en_us,
-      } as unknown as Record<string, Record<string, string>>
-    )[localStorage.locale];
-    ReactDOM.render(React.createElement(App, { strings: strings }), document.getElementById('root'));
-  } else {
-    // shows welcome page
-    ReactDOM.render(React.createElement(App, { welcome: true }), document.getElementById('root'));
-  }
+if (localStorage.welcomed) {
+  // choose the locale local
+  const strings = (
+    {
+      'en-US': en_us,
+    } as unknown as Record<string, Record<string, string>>
+  )[localStorage.locale]; // for avoid TypeScript errors // same as `switch` statement
+  // render the page with strings
+  ReactDOM.render(React.createElement(App, { strings: strings }), document.getElementById('root'));
 } else {
-  ReactDOM.render(React.createElement(PlatformError), document.getElementById('root'));
+  // shows welcome page
+  ReactDOM.render(React.createElement(App, { welcome: true }), document.getElementById('root'));
 }

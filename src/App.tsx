@@ -31,6 +31,8 @@ interface IStateContext {
 }
 // endregion
 
+// custom the mui theme with user select
+// but default is blue
 const theme = createMuiTheme({
   palette: {
     primary: localStorage.color ?? blue,
@@ -47,6 +49,7 @@ const theme = createMuiTheme({
   }
 });
 
+// use this to share public state to its children elements
 export const PublicStates = React.createContext<IStateContext>({});
 
 export default function App(props: IAppProps): React.ReactElement {
