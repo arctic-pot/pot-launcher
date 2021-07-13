@@ -2,7 +2,7 @@
   "name": "pot-launcher",
   "productName": "pot-launcher",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A modern Minecraft launcher with localization",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
@@ -10,8 +10,10 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
+    "lint:fix": "eslint --ext .ts,.tsx . --fix",
     "format:write": "prettier --write \"src/**/*.{tsx,ts,js}\"",
-    "format:check": "npx prettier --list-different \"src/**/*.{tsx,ts,js}\"",
+    "format:check": "prettier --list-different \"src/**/*.{tsx,ts,js}\"",
+    "format": "npm run format:check || npm run format:write",
     "code-style-check": "npm run format:check && npm run lint"
   },
   "keywords": [],
