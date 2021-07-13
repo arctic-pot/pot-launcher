@@ -11,7 +11,8 @@
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "format:write": "prettier --write \"src/**/*.{tsx,ts,js}\"",
-    "format:check": "npx prettier --list-different \"src/**/*.{tsx,ts,js}\""
+    "format:check": "npx prettier --list-different \"src/**/*.{tsx,ts,js}\"",
+    "code-style-check": "npm run format:check && npm run lint"
   },
   "keywords": [],
   "author": {
@@ -55,7 +56,10 @@
                 {
                   "html": "./src/index.html",
                   "js": "./src/renderer.ts",
-                  "name": "main_window"
+                  "name": "main_window",
+                  "preload": {
+                    "js": "./src/preload.ts"
+                  }
                 }
               ]
             }

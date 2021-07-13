@@ -1,7 +1,8 @@
 @charset "UTF-8";
 @import 'style/mixins';
 
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
   width: 100vw;
@@ -13,6 +14,35 @@ div#root {
   width: 100%;
   height: 100%;
   user-select: none;
+  filter: none;
+  transition-property: filter;
+  transition-duration: 2s;
+
+  &.egg-blur {
+    filter: blur(8px);
+  }
+  &.egg-gray {
+    filter: grayscale(100%);
+  }
+  &.egg-invert {
+    filter: invert(100%);
+  }
+  &.egg-hue {
+    filter: hue-rotate(90deg);
+  }
+  &.egg-opacity {
+    filter: opacity(0.1);
+  }
+  &.egg-sepia {
+    filter: sepia(0.5);
+  }
+  &.egg-wtf {
+    filter: blur(1px) grayscale(25%) sepia(25%) invert(10%);
+  }
+  &.egg-font * {
+    font-family: 'simsun', monospace, sans-serif !important;
+    color: transparent !important;
+  }
 }
 
 div.error-modal {
@@ -48,7 +78,7 @@ a {
 }
 
 @mixin region-font($region-font-family) {
-  font-family: -apple-system, 'Roboto', 'Segoe UI', $region-font-family, 'Droid Sans', sans-serif;
+  font-family: -apple-system, 'Inter', 'Segoe UI', $region-font-family, 'Droid Sans', sans-serif;
 }
 
 .no-drag {
@@ -56,26 +86,35 @@ a {
   margin-left: 5px;
 }
 
+.not-available-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  flex-direction: column;
+}
 
 * {
   @include font-sm;
   @include region-font('Microsoft YaHei UI');
 }
 
-[lang=zh-TW],
-[lang=zh-HK],
-[lang=zh-TW] *,
-[lang=zh-HK] *,{
+[lang='zh-TW'],
+[lang='zh-HK'],
+[lang='zh-TW'] *,
+[lang='zh-HK'] * {
   @include region-font('Microsoft JhengHei UI');
 }
 
-[lang=ja],
-[lang=ja] * {
+[lang='ja'],
+[lang='ja'] * {
   @include region-font('Meiryo UI');
 }
 
-[lang=ko],
-[lang=ko] * {
+[lang='ko'],
+[lang='ko'] * {
   @include region-font('Malgun Gothic');
 }
 

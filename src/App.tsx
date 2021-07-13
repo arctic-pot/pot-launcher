@@ -35,12 +35,15 @@ interface IStateContext {
 // but default is blue
 const theme = createMuiTheme({
   palette: {
-    primary: localStorage.color ?? blue,
+    primary: localStorage.color ? JSON.parse(localStorage.color) : blue,
   },
   typography: {
-    fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(
+    fontFamily: ['-apple-system', 'BlinkMacSystemFont', '"Inter"', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(
       ', '
     ),
+    allVariants: {
+      textTransform: 'none',
+    },
   },
 });
 
