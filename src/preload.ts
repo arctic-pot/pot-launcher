@@ -4,5 +4,5 @@ import { ipcRenderer, remote } from 'electron'; // eslint-disable-line @typescri
 window.ipcRenderer = ipcRenderer;
 window.remote = remote;
 
-window.temp = {}
-window.public = {}
+window.temp = {};
+window.public = {};

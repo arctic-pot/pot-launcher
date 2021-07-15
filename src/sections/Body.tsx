@@ -46,7 +46,6 @@ export default function (): React.ReactElement {
 
   return (
     <SnackbarProvider maxSnack={3}>
-
       <div id="body">
         <nav>
           <Tabs centered value={openingTab} onChange={handleChange} indicatorColor="primary" textColor="primary">
