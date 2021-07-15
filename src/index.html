@@ -9,24 +9,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   </head>
   <body>
-    <script>
-      // wait one second, by reason of loading time
-      // for some lower devices, it takes over 1000ms
-      // but in production env it will be much faster
-      setTimeout(() => {
-        const electron = require('electron');
-
-        document.getElementById('minimize-button').addEventListener('click', () => {
-          electron.ipcRenderer.send('minimize');
-        });
-
-        document.getElementById('close-button').addEventListener('click', () => {
-          // by a unknown bug, the window MUST be minimized before close
-          electron.ipcRenderer.send('minimize');
-          electron.ipcRenderer.send('close');
-        });
-      }, 1000);
-    </script>
     <div id="root"></div>
   </body>
 </html>

@@ -22,7 +22,8 @@
   "settings.custom.palette": "调色板",
   "settings.game": "游戏",
   "settings.game.path": "游戏路径",
-  "settings.game.path.no": "<未选择>",
+  "settings.game.path.choose": "选择",
+  "settings.game.path.no": "选择你想用于存放游戏文件夹的路径",
   "settings.game.autoVersionName": "使用自动生成的版本名称",
   "settings.recovery": "恢复",
   "settings.recovery.reset": "重置所有数据",
@@ -32,6 +33,9 @@
   "settings.alert.reset.content": "重置数据会删除所有的信息，包括保存的账号和设置，并重新启动应用。你确定要继续吗？",
   "settings.secret": "超级机密设置",
   "settings.secret.noClick": "千万别点",
+  "settings.reload": "重新启动启动器才能应用变更",
+  "settings.reloadNow": "立即重新启动",
+  "settings.saved": "变更已保存",
   "alert.continue": "继续",
   "alert.cancel": "取消"
 }

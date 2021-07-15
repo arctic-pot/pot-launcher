@@ -1,4 +1,6 @@
+import * as electron from 'electron';
 import { app, BrowserWindow, ipcMain } from 'electron';
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: any; //eslint-disable-line @typescript-eslint/no-explicit-any
 
@@ -35,6 +37,17 @@ const createWindow = (): void => {
 
   ipcMain.on('close', () => {
     mainWindow.close();
+  });
+
+  ipcMain.on('destroy', () => {
+    mainWindow.minimize();
+    mainWindow.close();
+  });
+
+  ipcMain.handle('choose-dir', async () => {
+    return await electron.dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory', 'dontAddToRecent'],
+    });
   });
 };
 

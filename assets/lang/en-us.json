@@ -22,7 +22,8 @@
   "settings.custom.palette": "Palette",
   "settings.game": "Game",
   "settings.game.path": "Game path",
-  "settings.game.path.no": "<Not selected>",
+  "settings.game.path.choose": "Choose",
+  "settings.game.path.no": "Select the folder where you want to storage game files",
   "settings.game.autoVersionName": "Use auto-generated version name",
   "settings.recovery": "Recovery",
   "settings.recovery.reset": "Reset all data",
@@ -32,6 +33,9 @@
   "settings.alert.reset.content": "Reset all data will remove all storages including saved accounts, and then the app will be restarted. Are you sure to continue?",
   "settings.secret": "Super secret settings",
   "settings.secret.noClick": "Do not click",
+  "settings.reload": "You need to restart the app to apply these update",
+  "settings.reloadNow": "Restart now",
+  "settings.saved": "Changes had saved",
   "alert.continue": "Continue",
   "alert.cancel": "Cancel"
 }

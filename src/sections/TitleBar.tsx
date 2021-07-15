@@ -20,6 +20,7 @@ const useStyles = makeStyles(() =>
 
 export default function (): React.ReactElement {
   const classes = useStyles();
+  const { ipcRenderer } = window;
   return (
     <>
       <AppBar position="static" className="title-bar">
@@ -30,17 +31,34 @@ export default function (): React.ReactElement {
             Pot Minecraft Launcher {info.versionMajor > 1 && info.versionRoman} {info.beta && 'BETA'}
           </Typography>
           <Tooltip title={<FormattedMessage id="title.reload" defaultMessage="Reload" />}>
-            <IconButton color="inherit" className="title-bar-action" onClick={() => location.reload()}>
+            <IconButton
+              color="inherit"
+              className="title-bar-action"
+              onClick={() => {
+                window.public.saveSettings();
+                location.reload();
+              }}
+            >
               <RefreshIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title={<FormattedMessage id="title.minimize" defaultMessage="Minimize" />}>
-            <IconButton color="inherit" className="title-bar-action" id="minimize-button">
+            <IconButton
+              color="inherit"
+              className="title-bar-action"
+              id="minimize-button"
+              onClick={() => ipcRenderer.send('minimize')}
+            >
               <MinimizeIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title={<FormattedMessage id="title.close" defaultMessage="Close" />}>
-            <IconButton color="inherit" className="title-bar-action" id="close-button">
+            <IconButton
+              color="inherit"
+              className="title-bar-action"
+              id="close-button"
+              onClick={() => ipcRenderer.send('destroy')}
+            >
               <CloseIcon />
             </IconButton>
           </Tooltip>

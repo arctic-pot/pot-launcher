@@ -24,6 +24,8 @@ import {
 } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import fs from 'graceful-fs';
+import path from 'path';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -68,14 +70,34 @@ export default function Settings(): React.ReactElement {
   );
 
   const saveSettings = () => {
-    localStorage.locale = settings.lang;
-    localStorage.gamePath = settings.gamePath ?? '';
-    localStorage.rpc = settings.rpc ? 'true' : '';
-    localStorage.rpcPort = settings.rpcPort;
-    localStorage.downThreads = settings.downThreads;
+    try {
+      const _settings = JSON.parse(window.temp.settingsJson);
+      Object.assign(localStorage, {
+        locale: _settings.lang,
+        gamePath: _settings.gamePath ?? '',
+        rpc: _settings.rpc ? 'true' : '',
+        rpcPort: _settings.rpcPort,
+        downThreads: _settings.downThreads,
+      });
+    } catch (e) {
+      //
+    }
   };
 
-  useEffect(saveSettings, [JSON.stringify(settings)]);
+  const saveSettingsTemp = () => {
+    window.temp.settingsJson = JSON.stringify(settings);
+  };
+
+  useEffect(() => {
+    window.public.saveSettings = saveSettings;
+
+    return () => {
+      saveSettings();
+      window.temp.settingsJson = void 0;
+    };
+  }, []);
+
+  useEffect(saveSettingsTemp, [JSON.stringify(settings)]);
 
   const selectChangeHandler = (keyName: string) => {
     return function handleChange(event: React.ChangeEvent<{ value: unknown }>) {
@@ -190,11 +212,31 @@ export default function Settings(): React.ReactElement {
                   <Button
                     variant="outlined"
                     onClick={() => {
-                      //electron.remote.dialog.showSaveDialogSync({});
+                      window.ipcRenderer
+                        .invoke('choose-dir')
+                        .then((result: any) => result.filePaths[0]) // eslint-disable-line @typescript-eslint/no-explicit-any
+                        .then((gamePath: string) => {
+                          // throw err if no directory chose
+                          if (gamePath === undefined) {
+                            throw Error();
+                          }
+                          // check directory
+                          if (gamePath.match(/[/\\]\.minecraft([/\\])?$/)) {
+                            // if path contains .minecraft at last
+                            mergeSettings({ gamePath: gamePath });
+                          } else {
+                            // else create the .minecraft directory
+                            const gamePathWithMC = path.resolve(gamePath, './.minecraft');
+                            mergeSettings({ gamePath: gamePathWithMC });
+                            return fs.mkdirSync(gamePathWithMC);
+                          }
+                        })
+                        .then()
+                        .catch();
                       return;
                     }}
                   >
-                    Choose
+                    <FormattedMessage id="settings.game.path.choose" />
                   </Button>
                 </ListItemSecondaryAction>
               </ListItem>
