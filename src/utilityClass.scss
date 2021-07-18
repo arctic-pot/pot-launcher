@@ -10,8 +10,8 @@
     height: 5px;
   }
 
-    &::-webkit-scrollbar-thumb {
-      background-color: #f0f0f0;
+  &::-webkit-scrollbar-thumb {
+    background-color: #f0f0f0;
     border-radius: 2px;
     transition-property: background-color;
     transition-duration: 0.1s;
@@ -21,5 +21,11 @@
   }
   &::-webkit-scrollbar-thumb:active {
     background-color: #bfbfbf;
+  }
+}
+
+.scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

@@ -212,7 +212,7 @@ export default function Settings(): React.ReactElement {
                   <Button
                     variant="outlined"
                     onClick={() => {
-                      window.ipcRenderer
+                      window.electron.ipcRenderer
                         .invoke('choose-dir')
                         .then((result: any) => result.filePaths[0]) // eslint-disable-line @typescript-eslint/no-explicit-any
                         .then((gamePath: string) => {

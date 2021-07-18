@@ -20,7 +20,7 @@ const useStyles = makeStyles(() =>
 
 export default function (): React.ReactElement {
   const classes = useStyles();
-  const { ipcRenderer } = window;
+  const { ipcRenderer } = window.electron;
   return (
     <>
       <AppBar position="static" className="title-bar">
@@ -35,7 +35,7 @@ export default function (): React.ReactElement {
               color="inherit"
               className="title-bar-action"
               onClick={() => {
-                window.public.saveSettings();
+                window.public.saveSettings && window.public.saveSettings();
                 location.reload();
               }}
             >
