@@ -187,10 +187,18 @@ export default function Settings(): React.ReactElement {
           <AccordionDetails>
             <List className={classes.list}>
               <ListItem>
-                <ListItemText primary={<FormattedMessage id="settings.custom.palette" />} />
+                <ListItemText primary={<FormattedMessage id="settings.custom.primaryColor" />} />
                 <ListItemSecondaryAction>
                   <Select value={'blue'} disabled>
                     <MenuItem value="blue">Blue (Default)</MenuItem>
+                  </Select>
+                </ListItemSecondaryAction>
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={<FormattedMessage id="settings.custom.secondaryColor" />} />
+                <ListItemSecondaryAction>
+                  <Select value={'red'} disabled>
+                    <MenuItem value="red">Red (Default)</MenuItem>
                   </Select>
                 </ListItemSecondaryAction>
               </ListItem>
