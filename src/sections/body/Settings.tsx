@@ -222,12 +222,11 @@ export default function Settings(): React.ReactElement {
                     onClick={() => {
                       window.electron.ipcRenderer
                         .invoke('choose-dir')
-                        .then((result: any) => result.filePaths[0]) // eslint-disable-line @typescript-eslint/no-explicit-any
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        .then((result: any) => result.filePaths[0])
                         .then((gamePath: string) => {
                           // throw err if no directory chose
-                          if (gamePath === undefined) {
-                            throw Error();
-                          }
+                          if (gamePath === undefined) throw Error();
                           // check directory
                           if (gamePath.match(/[/\\]\.minecraft([/\\])?$/)) {
                             // if path contains .minecraft at last
@@ -266,6 +265,7 @@ export default function Settings(): React.ReactElement {
               variant="outlined"
               color="secondary"
               onClick={() => {
+                // add a random effects to screen.
                 const root = document.getElementById('root');
                 if (root.classList.length <= 0) {
                   const classToken =
