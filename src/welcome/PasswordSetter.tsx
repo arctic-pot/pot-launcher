@@ -12,6 +12,7 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
   const controlTextField = (func: typeof setPassword | typeof setPasswordRepeated) => {
     return function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
       func(event.target.value);
+      setError('');
     };
   };
 
