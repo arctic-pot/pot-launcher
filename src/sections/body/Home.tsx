@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-  Button,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  ListSubheader,
-  Paper,
-} from '@material-ui/core';
+import { Button, Drawer, List, ListItem, ListItemText, ListSubheader, Paper } from '@material-ui/core';
 import { BodyTabs, PropsReceiveTabState } from '../Body';
 import './Home.scss';
 //import ExternalLinkIcon from '@material-ui/icons/OpenInNewRounded';
-import fs from 'graceful-fs';
+import fs from 'fs-extra';
 import path from 'path';
 
 //enum AccountButtonState {
@@ -52,64 +44,71 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
 
   // manage versions list
   useEffect(() => {
-    const versionsDirectory = path.resolve(localStorage.gamePath, './versions');
-    const versionDirectories = fs.readdirSync(versionsDirectory);
-    setVersionsList(
-      versionDirectories
-        .map((version) => {
-          const _versionManifestPath = path.resolve(versionsDirectory, `./${version}/${version}.json`);
-          const manifest = JSON.parse(fs.readFileSync(_versionManifestPath).toString());
-          const patches = manifest.patches;
-          const versionId = patches.find((patch: VersionPatch) => patch.id === 'game').version;
-          const isSnapshot = manifest.type === 'snapshot';
-          // region get forge, fabric, optifine, and display version
-          /*************************************************/
-          /*               ===  WARNING  ===               */
-          /*   The following code is hard to read and no   */
-          /*   any comments. Hide these code is better.    */
-          /*************************************************/
-          const fabricInfo = patches.find((patch: VersionPatch) => patch.id === 'fabric');
-          const fabricExist = !!fabricInfo;
-          const fabricVersion = fabricExist ? fabricInfo.version : null;
-          const forgeInfo = patches.find((patch: VersionPatch) => patch.id === 'forge');
-          const forgeExist = !!forgeInfo;
-          const forgeVersion = forgeExist ? forgeInfo.version : null;
-          const optifineInfo = patches.find((patch: VersionPatch) => patch.id === 'optifine');
-          const optifineExist = !!optifineInfo;
-          const optifineVersion = optifineExist ? optifineInfo.version : null;
-          const displayId =
-            versionId +
-            (optifineExist ? `, Optifine ${optifineVersion}` : '') +
-            (forgeExist ? `, Forge ${forgeVersion}` : '') +
-            (fabricExist ? `, Fabric ${fabricVersion}` : '');
-          // endregion
+    if (localStorage.gamePath) {
+      const versionsDirectory = path.resolve(localStorage.gamePath, './versions');
+      const versionDirectories = fs.readdirSync(versionsDirectory);
+      setVersionsList(
+        versionDirectories
+          .map((version) => {
+            const _versionManifestPath = path.resolve(versionsDirectory, `./${version}/${version}.json`);
+            try {
+              const manifest = fs.readJsonSync(_versionManifestPath);
+              const patches = manifest.patches;
+              const versionId = patches.find((patch: VersionPatch) => patch.id === 'game').version;
+              const isSnapshot = manifest.type === 'snapshot';
+              // region get forge, fabric, optifine, and display version
+              /*************************************************/
+              /*               ===  WARNING  ===               */
+              /*   The following code is hard to read and no   */
+              /*   any comments. Hide these code is better.    */
+              /*************************************************/
+              const fabricInfo = patches.find((patch: VersionPatch) => patch.id === 'fabric');
+              const fabricExist = !!fabricInfo;
+              const fabricVersion = fabricExist ? fabricInfo.version : null;
+              const forgeInfo = patches.find((patch: VersionPatch) => patch.id === 'forge');
+              const forgeExist = !!forgeInfo;
+              const forgeVersion = forgeExist ? forgeInfo.version : null;
+              const optifineInfo = patches.find((patch: VersionPatch) => patch.id === 'optifine');
+              const optifineExist = !!optifineInfo;
+              const optifineVersion = optifineExist ? optifineInfo.version : null;
+              const displayId =
+                versionId +
+                (optifineExist ? `, Optifine ${optifineVersion}` : '') +
+                (forgeExist ? `, Forge ${forgeVersion}` : '') +
+                (fabricExist ? `, Fabric ${fabricVersion}` : '');
+              // endregion
 
-          return {
-            displayName: version,
-            id: versionId,
-            displayId: displayId,
-            snapshot: isSnapshot,
-            assets: manifest.assets,
-          };
-        })
-        .sort((ver1, ver2) => {
-          // in Minecraft, major version is always 1.
-          // snapshot version and April Fool version should compare them specially
-          const ver1Id = ver1.snapshot ? ver1.assets + '.-1' : ver1.id;
-          const ver2Id = ver2.snapshot ? ver2.assets + '.-1' : ver2.id;
-          const [, ver1Minor, _ver1Patch] = ver1Id.split('.').map((num: string) => parseInt(num));
-          const [, ver2Minor, _ver2Patch] = ver2Id.split('.').map((num: string) => parseInt(num));
-          // in some cases, the version id doesn't has a patch version, e.g. 1.17.
-          // it must be a complete version id to compare
-          const ver1Patch = _ver1Patch ?? 0;
-          const ver2Patch = _ver2Patch ?? 0;
-          if (ver1Minor > ver2Minor) return -1;
-          if (ver1Minor < ver2Minor) return 1;
-          if (ver1Patch > ver2Patch) return -1;
-          if (ver1Patch < ver2Patch) return 1;
-          return 0;
-        })
-    );
+              return {
+                displayName: version,
+                id: versionId,
+                displayId: displayId,
+                snapshot: isSnapshot,
+                assets: manifest.assets,
+              };
+            } catch (e) {
+              return void 0;
+            }
+          })
+          .filter(Boolean)
+          .sort((ver1, ver2) => {
+            // in Minecraft, major version is always 1.
+            // snapshot version and April Fool version should compare them specially
+            const ver1Id = ver1.snapshot ? ver1.assets + '.-1' : ver1.id;
+            const ver2Id = ver2.snapshot ? ver2.assets + '.-1' : ver2.id;
+            const [, ver1Minor, _ver1Patch] = ver1Id.split('.').map((num: string) => parseInt(num));
+            const [, ver2Minor, _ver2Patch] = ver2Id.split('.').map((num: string) => parseInt(num));
+            // in some cases, the version id doesn't has a patch version, e.g. 1.17.
+            // it must be a complete version id to compare
+            const ver1Patch = _ver1Patch ?? 0;
+            const ver2Patch = _ver2Patch ?? 0;
+            if (ver1Minor > ver2Minor) return -1;
+            if (ver1Minor < ver2Minor) return 1;
+            if (ver1Patch > ver2Patch) return -1;
+            if (ver1Patch < ver2Patch) return 1;
+            return 0;
+          })
+      );
+    }
   }, []);
 
   useEffect(() => {
