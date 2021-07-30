@@ -1,101 +1,12 @@
 @import '../style/mixins';
 
-@mixin welcome-center-modal {
+.lang-button {
   width: 100%;
-  height: calc(100% - 30px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
+  height: 50px;
+  border-radius: 4px !important;
 
-div#welcome-loading {
-  @include welcome-center-modal;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-h1 {
-  @include font-lg;
-}
-
-@keyframes motion-fadeIn {
-  from {
-    transform: translate(10px, 0);
-    opacity: 0;
-  }
-
-  to {
-    transform: translate(0, 0);
-    opacity: 1;
-  }
-}
-
-div#welcome-lang {
-  @include welcome-center-modal;
-
-  & &-choose {
-    // div#welcome-lang div#welcome-lang-choose
-    display: grid;
-    grid-template-columns: repeat(4, 175px);
-    grid-template-rows: repeat(3, 50px);
-    grid-row-gap: 15px;
-    grid-column-gap: 15px;
-
-    button.chooser {
-      @include primary;
-      border: none;
-      transition: background-color, box-shadow;
-      box-shadow: transparent 0 0 5px;
-      transition-duration: 0.2s;
-      cursor: pointer;
-      border-radius: 5px;
-      opacity: 0;
-      animation-name: motion-fadeIn;
-      animation-duration: 0.2s;
-      animation-fill-mode: forwards;
-
-      @for $i from 1 through 12 {
-        &:nth-child(#{$i}) {
-          animation-delay: ($i - 1) * 0.1s + 0.3s;
-        }
-      }
-
-      .chooser-title {
-        @include font-md;
-        font-weight: 600;
-      }
-
-      &.disabled {
-        cursor: default;
-        background-color: #adb5bd;
-        //opacity: 0.5;
-      }
-
-      &:not(.disabled):hover {
-        background-color: #0868b8;
-        @include shadow;
-      }
-    }
-  }
-}
-
-div#welcome-java {
-  @include welcome-center-modal;
-
-  button {
-    @include primary;
-    padding: 5px 20px;
-    border-radius: 5px;
-    border: none;
-    transition: background-color, box-shadow;
-    box-shadow: transparent 0 0 5px;
-    transition-duration: 0.2s;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #0868b8;
-      @include shadow;
-    }
+  &.Mui-disabled {
+    background-color: #d9d9d9;
+    color: #8c8c8c;
   }
 }
