@@ -11,6 +11,8 @@
   "home.title": "Home",
   "home.noPath": "Game path is not selected",
   "home.verList": "Choose version",
+  "home.noVer": "No version selected",
+  "home.chooseVer": "Click here to choose a version",
   "home.accountList": "Choose account",
   "home.buyAccount": "Purchase an account now",
   "home.newAccount": "New account",
