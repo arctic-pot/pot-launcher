@@ -19,6 +19,6 @@ document.addEventListener('keydown', (event) => {
 const filePath = path.resolve(os.homedir(), './.pmcl');
 fs.access(filePath).catch(() => {
   fs.writeJsonSync(filePath, {
-    accounts: []
+    accounts: [],
   });
 });
