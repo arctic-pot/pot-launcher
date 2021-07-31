@@ -30,7 +30,7 @@ const createWindow = (): void => {
 
   if (process.env.NODE_ENV === 'development') {
     // Open the DevTools
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
   }
 
   ipcMain.on('minimize', () => {
@@ -44,6 +44,10 @@ const createWindow = (): void => {
   ipcMain.on('destroy', () => {
     mainWindow.minimize();
     mainWindow.close();
+  });
+
+  ipcMain.on('devtool', () => {
+    mainWindow.webContents.openDevTools();
   });
 
   ipcMain.handle('choose-dir', async () => {

@@ -280,6 +280,26 @@ export default function Settings(): React.ReactElement {
           </AccordionDetails>
         </Accordion>
         <Accordion>
+          <AccordionSummary>Development settings</AccordionSummary>
+          <AccordionDetails>
+            <List className={classes.list}>
+              <ListItem>
+                <ListItemText primary="Open DevTools" />
+                <ListItemSecondaryAction>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      window.electron.ipcRenderer.send('devtool');
+                    }}
+                  >
+                    Open DevTools
+                  </Button>
+                </ListItemSecondaryAction>
+              </ListItem>
+            </List>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
           <AccordionSummary>
             <FormattedMessage id="settings.recovery" />
           </AccordionSummary>
