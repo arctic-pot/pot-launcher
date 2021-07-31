@@ -1,19 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Drawer, List, ListItem, ListItemText, ListSubheader, Paper } from '@material-ui/core';
-import { BodyTabs, PropsReceiveTabState } from '../Body';
+import {
+  Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Paper,
+  Popover,
+} from '@material-ui/core';
+import { PropsReceiveTabState, BodyTabs } from '../Body';
 import './Home.scss';
-//import ExternalLinkIcon from '@material-ui/icons/OpenInNewRounded';
+import ExternalLinkIcon from '@material-ui/icons/OpenInNewRounded';
 import fs from 'fs-extra';
 import path from 'path';
 
-//enum AccountButtonState {
-//  hidden,
-//  popover,
-//  offline,
-//  microsoft,
-//  injector,
-//}
+enum AccountButtonState {
+  hidden,
+  popover,
+  offline,
+  microsoft,
+  injector,
+}
 
 interface InstalledVersion {
   displayName: string;
@@ -30,12 +40,13 @@ interface VersionPatch extends Record<string, unknown> {
 export default function Home(props: PropsReceiveTabState<unknown>): React.ReactElement {
   const { setOpeningTab } = props;
   const [versionDrawerOpen, setVersionDrawerOpen] = useState(false);
-  //const [accountButtonState, setAccountButtonState] = useState(AccountButtonState.hidden);
+  const [accountDrawerOpen, setAccountDrawerOpen] = useState(false);
+  const [accountButtonState, setAccountButtonState] = useState(AccountButtonState.hidden);
   const [versionsList, setVersionsList] = useState<InstalledVersion[]>();
   const [selectedVersion, setSelectedVersion] = useState<InstalledVersion>(
     JSON.parse(localStorage.selectedVersion || '{}')
   );
-  //const accountButtonRef = useRef();
+  const accountButtonRef = useRef();
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   const isEmpty = (obj: object) => {
@@ -142,7 +153,12 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                     }
                   />
                 </ListItem>
-                <ListItem button>
+                <ListItem
+                  button
+                  onClick={() => {
+                    setAccountDrawerOpen(true);
+                  }}
+                >
                   <ListItemText primary="TODO" secondary="This feature is not completed!" />
                 </ListItem>
               </List>
@@ -177,68 +193,95 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                   ))}
               </List>
             </Drawer>
+            <Drawer
+              open={accountDrawerOpen}
+              onClose={() => {
+                setAccountDrawerOpen(false);
+              }}
+            >
+              <List
+                style={{
+                  width: 415,
+                  height: 480,
+                }}
+                subheader={
+                  <ListSubheader className="home-subheader">
+                    <FormattedMessage id="home.accountList" />
+                  </ListSubheader>
+                }
+              >
+                {/*versionsList &&
+                  versionsList.map((version) => (
+                    <ListItem
+                      button
+                      key={version.displayName}
+                      onClick={() => {
+                        selectVersion(version);
+                      }}
+                    >
+                      <ListItemText primary={version.displayName} secondary={version.displayId} />
+                    </ListItem>
+                  ))*/}
+              </List>
+              <Popover
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                anchorEl={accountButtonRef.current}
+                open={accountButtonState === AccountButtonState.popover}
+                onClose={() => setAccountButtonState(AccountButtonState.hidden)}
+              >
+                <List>
+                  <ListItem button disabled>
+                    <ListItemText
+                      primary={<FormattedMessage id="account.microsoft" />}
+                      secondary={<FormattedMessage id="account.microsoft.desc" />}
+                    />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText
+                      primary={<FormattedMessage id="account.offline" />}
+                      secondary={<FormattedMessage id="account.offline.desc" />}
+                    />
+                  </ListItem>
+                  <ListItem button disabled>
+                    <ListItemText
+                      primary={<FormattedMessage id="account.injector" />}
+                      secondary={<FormattedMessage id="account.injector.desc" />}
+                    />
+                  </ListItem>
+                  <ListItem
+                    button
+                    onClick={() => {
+                      setAccountButtonState(AccountButtonState.hidden);
+                      window.electron.shell.openExternal('https://www.minecraft.net/store/minecraft-java-edition');
+                    }}
+                  >
+                    <ListItemIcon>
+                      <ExternalLinkIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={<FormattedMessage id="home.buyAccount" />} />
+                  </ListItem>
+                </List>
+              </Popover>
+                <div className="home-button" ref={accountButtonRef}>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      setAccountButtonState(AccountButtonState.popover);
+                    }}
+                  >
+                    <FormattedMessage id="home.newAccount" />
+                  </Button>
+                </div>
+            </Drawer>
           </section>
           {/*
-          <section id="home-account-list" className="home-paper-parent">
-            <Popover
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              transformOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              anchorEl={accountButtonRef.current}
-              open={accountButtonState === AccountButtonState.popover}
-              onClose={() => setAccountButtonState(AccountButtonState.hidden)}
-            >
-              <List>
-                <ListItem button>
-                  <ListItemText
-                    primary={<FormattedMessage id="account.microsoft" />}
-                    secondary={<FormattedMessage id="account.microsoft.desc" />}
-                  />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText
-                    primary={<FormattedMessage id="account.offline" />}
-                    secondary={<FormattedMessage id="account.offline.desc" />}
-                  />
-                </ListItem>
-                <ListItem button>
-                  <ListItemText
-                    primary={<FormattedMessage id="account.injector" />}
-                    secondary={<FormattedMessage id="account.injector.desc" />}
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  onClick={() => {
-                    setAccountButtonState(AccountButtonState.hidden);
-                    window.electron.shell.openExternal('https://www.minecraft.net/store/minecraft-java-edition');
-                  }}
-                >
-                  <ListItemIcon>
-                    <ExternalLinkIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={<FormattedMessage id="home.buyAccount" />} />
-                </ListItem>
-              </List>
-            </Popover>
-            <Paper>
-              <div className="home-list">a</div>
-              <div className="home-button" ref={accountButtonRef}>
-                <Button
-                  variant="contained"
-                  onClick={() => {
-                    setAccountButtonState(AccountButtonState.popover);
-                  }}
-                >
-                  <FormattedMessage id="home.newAccount" />
-                </Button>
-              </div>
-            </Paper>
           </section>*/}
         </div>
       ) : (

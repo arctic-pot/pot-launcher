@@ -16,9 +16,27 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-const filePath = path.resolve(os.homedir(), './.pmcl');
-fs.access(filePath).catch(() => {
-  fs.writeJsonSync(filePath, {
-    accounts: [],
+// accounts, salt, etc. shouldn't store directly to localStorage.
+
+const filePath = path.resolve(os.homedir(), './.pmcl-accounts');
+fs.access(filePath)
+  .then(() => fs.readJson(filePath))
+  .then((data) => {
+    window.temp.metadata = data;
+  })
+  .catch(() => {
+    fs.writeJsonSync(
+      filePath,
+      {
+        version: 1,
+        accounts: [],
+        salt: 'x'.repeat(48).replace(/x/g, () => {
+          const CHARS = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        }),
+        lastUpdate: Date.now(),
+      },
+      { spaces: 2 }
+    );
+    location.reload();
   });
-});
