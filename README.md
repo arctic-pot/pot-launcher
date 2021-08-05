@@ -22,6 +22,20 @@ Pot launcher is a TechPot International Project built with electron & react
 
 Used UI framework of Material UI
 
+### Privacy
+
+Privacy is your right. We will defend that right for you.
+Pot Launcher used AEC and two-factors of hash with salt for encrypt your access token, with a password set by your own, which is encrypted with SHA-224 and salt.
+The decrypt token will be destroyed when you exit the launcher.
+
+All salt used for encryption have 48 characters. 
+Each character is randomly selected from all ASCII characters excluding space, backslash and double quote.
+
+### Storage
+
+We don't storage your account file and your launcher in the same directory.
+Which means that your account data will be kept after you uninstall the launcher.
+
 ## Disclaimers
 
 Pot Launcher is an opensource project made by TechPot Studio and licensed under MIT License.

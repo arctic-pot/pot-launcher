@@ -6,6 +6,7 @@ import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
+import OpeningScreen from './open/OpeningScreen';
 
 // region type declarations
 export enum AccountType {
@@ -20,6 +21,7 @@ type StateSetter<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export interface IAppProps {
   welcome?: boolean;
+  opening?: boolean;
   strings?: Record<string, string>;
 }
 
@@ -64,6 +66,7 @@ export default function App(props: IAppProps): React.ReactElement {
   // endregion
 
   const welcome = !!props.welcome;
+  const opening = !!props.opening;
   const { strings } = props;
   const { locale } = localStorage;
   console.log(strings);
@@ -78,7 +81,9 @@ export default function App(props: IAppProps): React.ReactElement {
       <IntlProvider locale={locale} messages={strings} defaultLocale="zh-CN">
         <ThemeProvider theme={theme}>
           <TitleBar />
-          {welcome ? <Welcome /> : <Body />}
+          {welcome && <Welcome />}
+          {opening && <OpeningScreen />}
+          {!(welcome || opening) && <Body />}
         </ThemeProvider>
       </IntlProvider>
     </PublicStates.Provider>

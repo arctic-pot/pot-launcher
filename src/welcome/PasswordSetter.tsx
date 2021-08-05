@@ -3,10 +3,14 @@ import React, { useState } from 'react';
 import { WelcomeComponentProps } from './Welcome';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, TextField } from '@material-ui/core';
+import { mergeMetadata } from 'utils/config';
+import CryptoJS from 'crypto-js';
+
 export default function PasswordSetter(props: WelcomeComponentProps): React.ReactElement {
   const [password, setPassword] = useState<string>();
   const [passwordRepeated, setPasswordRepeated] = useState<string>();
   const [error, setError] = useState<string>('');
+  const salt = window.temp.accounts.salt;
   const intl = useIntl();
 
   const controlTextField = (func: typeof setPassword | typeof setPasswordRepeated) => {
@@ -60,6 +64,9 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
             // check password same
             if (password === passwordRepeated) {
               localStorage.TEMP_password = password;
+              mergeMetadata({
+                pwd: CryptoJS.MD5(CryptoJS.SHA512(CryptoJS.SHA224(password + salt) + salt) + salt).toString(),
+              });
               props.setCompleted(3);
             } else {
               setError(intl.formatMessage({ id: 'welcome.password.pwd.different' }));

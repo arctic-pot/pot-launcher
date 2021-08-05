@@ -3,19 +3,24 @@ import { FormattedMessage } from 'react-intl';
 import {
   Button,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemIcon,
+  ListItemSecondaryAction,
   ListItemText,
   ListSubheader,
   Paper,
   Popover,
 } from '@material-ui/core';
-import { PropsReceiveTabState, BodyTabs } from '../Body';
+import { BodyTabs, PropsReceiveTabState } from '../Body';
 import './Home.scss';
 import ExternalLinkIcon from '@material-ui/icons/OpenInNewRounded';
+import DeleteIcon from '@material-ui/icons/DeleteRounded';
 import fs from 'fs-extra';
 import path from 'path';
+import OfflineAccountDialog from './newAccount/OfflineAccountDialog';
+import { mergeMetadata } from 'utils/config';
 
 enum AccountButtonState {
   hidden,
@@ -25,11 +30,31 @@ enum AccountButtonState {
   injector,
 }
 
-interface InstalledVersion {
+interface ArgumentRule {
+  action: 'allow' | 'disallow';
+  feature?: Record<string, boolean>;
+  os?: Record<string, string>;
+}
+
+export interface ArgumentWithRule {
+  rules: ArgumentRule[];
+  value: string[] | string;
+}
+
+export interface Version {
   displayName: string;
   id: string;
   displayId: string;
   snapshot: boolean;
+  gameArguments: (string | ArgumentWithRule)[];
+  jvmArguments?: (string | ArgumentWithRule)[];
+}
+
+export interface Account {
+  name: string;
+  type: 'offline' | 'microsoft' | 'injector';
+  clientToken?: string;
+  accessTokenEncrypted?: string;
 }
 
 interface VersionPatch extends Record<string, unknown> {
@@ -42,10 +67,10 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
   const [versionDrawerOpen, setVersionDrawerOpen] = useState(false);
   const [accountDrawerOpen, setAccountDrawerOpen] = useState(false);
   const [accountButtonState, setAccountButtonState] = useState(AccountButtonState.hidden);
-  const [versionsList, setVersionsList] = useState<InstalledVersion[]>();
-  const [selectedVersion, setSelectedVersion] = useState<InstalledVersion>(
-    JSON.parse(localStorage.selectedVersion || '{}')
-  );
+  const [versionsList, setVersionsList] = useState<Version[]>();
+  const [accountsList, setAccountsList] = useState<Account[]>(window.temp.accounts.accounts);
+  const [selectedVersion, setSelectedVersion] = useState<Version>(JSON.parse(localStorage.selectedVersion || '{}'));
+  const [selectedAccount, setSelectedAccount] = useState<Account>(JSON.parse(localStorage.selectedAccount || '{}'));
   const accountButtonRef = useRef();
 
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -88,6 +113,9 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 (forgeExist ? `, Forge ${forgeVersion}` : '') +
                 (fabricExist ? `, Fabric ${fabricVersion}` : '');
               // endregion
+              const gameArguments = manifest.minecraftArguments
+                ? manifest.minecraftArguments.split(' ').concat([manifest.arguments.game])
+                : manifest.arguments.game;
 
               return {
                 displayName: version,
@@ -95,6 +123,8 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 displayId: displayId,
                 snapshot: isSnapshot,
                 assets: manifest.assets,
+                gameArguments: gameArguments,
+                jvmArguments: manifest.arguments.jvm,
               };
             } catch (e) {
               return void 0;
@@ -124,9 +154,20 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
 
   useEffect(() => {
     localStorage.selectedVersion = JSON.stringify(selectedVersion);
-  }, [selectedVersion]);
+  }, [JSON.stringify(selectedVersion)]);
 
-  const selectVersion = (version: InstalledVersion) => {
+  useEffect(() => {
+    localStorage.selectedAccount = JSON.stringify(selectedAccount);
+  }, [JSON.stringify(selectedAccount)]);
+
+  useEffect(() => {
+    if (accountsList) {
+      window.temp.accounts.accounts = accountsList;
+      mergeMetadata({ accounts: accountsList });
+    }
+  }, [JSON.stringify(accountsList)]);
+
+  const selectVersion = (version: Version) => {
     setSelectedVersion(version);
     setVersionDrawerOpen(false);
   };
@@ -159,10 +200,25 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                     setAccountDrawerOpen(true);
                   }}
                 >
-                  <ListItemText primary="TODO" secondary="This feature is not completed!" />
+                  <ListItemText
+                    primary={isEmpty(selectedAccount) ? selectedAccount.name : <FormattedMessage id="home.noAccount" />}
+                    secondary={
+                      isEmpty(selectedAccount) ? (
+                        <FormattedMessage id={`account.${selectedAccount.type}`} />
+                      ) : (
+                        <FormattedMessage id="home.chooseAccount" />
+                      )
+                    }
+                  />
+                </ListItem>
+                <ListItem>
+                  <Button variant="contained" style={{ width: '100%', height: 50 }}>
+                    <FormattedMessage id="home.launch" />
+                  </Button>
                 </ListItem>
               </List>
             </Paper>
+
             <Drawer
               open={versionDrawerOpen}
               onClose={() => {
@@ -203,6 +259,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 style={{
                   width: 415,
                   height: 480,
+                  overflow: 'auto',
                 }}
                 subheader={
                   <ListSubheader className="home-subheader">
@@ -210,18 +267,38 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                   </ListSubheader>
                 }
               >
-                {/*versionsList &&
-                  versionsList.map((version) => (
-                    <ListItem
-                      button
-                      key={version.displayName}
-                      onClick={() => {
-                        selectVersion(version);
-                      }}
-                    >
-                      <ListItemText primary={version.displayName} secondary={version.displayId} />
-                    </ListItem>
-                  ))*/}
+                {accountsList
+                  ? accountsList.filter(Boolean).map((account: Account) => {
+                      return (
+                        <ListItem
+                          key={account.name}
+                          button
+                          onClick={() => {
+                            setSelectedAccount(account);
+                            setAccountDrawerOpen(false);
+                          }}
+                        >
+                          <ListItemText
+                            primary={account.name}
+                            secondary={<FormattedMessage id={`account.${account.type}`} />}
+                          />
+                          <ListItemSecondaryAction>
+                            <IconButton
+                              onClick={() => {
+                                const index = accountsList.findIndex(
+                                  (acc) => acc.type === account.type && acc.name === account.name
+                                );
+                                delete accountsList[index];
+                                setAccountsList(accountsList.filter(Boolean));
+                              }}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                      );
+                    })
+                  : ''}
               </List>
               <Popover
                 anchorOrigin={{
@@ -243,7 +320,12 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                       secondary={<FormattedMessage id="account.microsoft.desc" />}
                     />
                   </ListItem>
-                  <ListItem button>
+                  <ListItem
+                    button
+                    onClick={() => {
+                      setAccountButtonState(AccountButtonState.offline);
+                    }}
+                  >
                     <ListItemText
                       primary={<FormattedMessage id="account.offline" />}
                       secondary={<FormattedMessage id="account.offline.desc" />}
@@ -269,16 +351,22 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                   </ListItem>
                 </List>
               </Popover>
-                <div className="home-button" ref={accountButtonRef}>
-                  <Button
-                    variant="contained"
-                    onClick={() => {
-                      setAccountButtonState(AccountButtonState.popover);
-                    }}
-                  >
-                    <FormattedMessage id="home.newAccount" />
-                  </Button>
-                </div>
+              <OfflineAccountDialog
+                open={accountButtonState === AccountButtonState.offline}
+                onClose={() => {
+                  setAccountButtonState(AccountButtonState.hidden);
+                }}
+              />
+              <div className="home-button" ref={accountButtonRef}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    setAccountButtonState(AccountButtonState.popover);
+                  }}
+                >
+                  <FormattedMessage id="home.newAccount" />
+                </Button>
+              </div>
             </Drawer>
           </section>
           {/*

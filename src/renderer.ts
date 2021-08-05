@@ -22,7 +22,10 @@ const filePath = path.resolve(os.homedir(), './.pmcl-accounts');
 fs.access(filePath)
   .then(() => fs.readJson(filePath))
   .then((data) => {
-    window.temp.metadata = data;
+    window.temp.accounts = data;
+  })
+  .then(() => {
+    document.dispatchEvent(new Event('render'));
   })
   .catch(() => {
     fs.writeJsonSync(
@@ -31,8 +34,9 @@ fs.access(filePath)
         version: 1,
         accounts: [],
         salt: 'x'.repeat(48).replace(/x/g, () => {
-          const CHARS = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-          return CHARS[Math.floor(Math.random() * CHARS.length)];
+          const CHARS = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()/*-_+<>|[]{},.;:`~'?";
+          const CHARS_SPLIT = CHARS.split('');
+          return CHARS_SPLIT[Math.floor(Math.random() * CHARS.length)];
         }),
         lastUpdate: Date.now(),
       },

@@ -30,7 +30,7 @@ const createWindow = (): void => {
 
   if (process.env.NODE_ENV === 'development') {
     // Open the DevTools
-    //mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
   }
 
   ipcMain.on('minimize', () => {
