@@ -26,6 +26,7 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import fs from 'graceful-fs';
 import path from 'path';
+import { ipcRenderer } from 'electron';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -220,7 +221,7 @@ export default function Settings(): React.ReactElement {
                   <Button
                     variant="outlined"
                     onClick={() => {
-                      window.electron.ipcRenderer
+                      ipcRenderer
                         .invoke('choose-dir')
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         .then((result: any) => result.filePaths[0])
@@ -289,7 +290,7 @@ export default function Settings(): React.ReactElement {
                   <Button
                     variant="outlined"
                     onClick={() => {
-                      window.electron.ipcRenderer.send('devtool');
+                      ipcRenderer.send('devtool');
                     }}
                   >
                     Open DevTools

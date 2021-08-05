@@ -22,4 +22,7 @@ module.exports = {
     }
   },
   target: 'node',
+  externals: {
+    'electron': 'commonjs2 electron'
+  }
 };

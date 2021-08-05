@@ -6,6 +6,7 @@ import RefreshIcon from '@material-ui/icons/RefreshRounded';
 import './TitleBar.scss';
 import info from 'assets/versionList.json';
 import { FormattedMessage } from 'react-intl';
+import { ipcRenderer } from 'electron';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -20,7 +21,6 @@ const useStyles = makeStyles(() =>
 
 export default function (): React.ReactElement {
   const classes = useStyles();
-  const { ipcRenderer } = window.electron;
   return (
     <>
       <AppBar position="static" className="title-bar">

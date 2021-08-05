@@ -21,6 +21,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import OfflineAccountDialog from './newAccount/OfflineAccountDialog';
 import { mergeMetadata } from 'utils/config';
+import electron from 'electron';
 
 enum AccountButtonState {
   hidden,
@@ -341,7 +342,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                     button
                     onClick={() => {
                       setAccountButtonState(AccountButtonState.hidden);
-                      window.electron.shell.openExternal('https://www.minecraft.net/store/minecraft-java-edition');
+                      electron.shell.openExternal('https://www.minecraft.net/store/minecraft-java-edition');
                     }}
                   >
                     <ListItemIcon>
