@@ -2,7 +2,7 @@ import React from 'react';
 
 interface DialogPropsWithoutChildren {
   open: boolean;
-  onClose: () => void
+  onClose: () => void;
 }
 
-export type DialogProps = React.PropsWithChildren<DialogPropsWithoutChildren>
+export type DialogProps = React.PropsWithChildren<DialogPropsWithoutChildren>;
