@@ -49,6 +49,7 @@ export interface Version {
   snapshot: boolean;
   gameArguments: (string | ArgumentWithRule)[];
   jvmArguments?: (string | ArgumentWithRule)[];
+  javaVersion: 8 | 16;
 }
 
 export interface Account {
@@ -73,9 +74,10 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
   const [selectedVersion, setSelectedVersion] = useState<Version>(JSON.parse(localStorage.selectedVersion || '{}'));
   const [selectedAccount, setSelectedAccount] = useState<Account>(JSON.parse(localStorage.selectedAccount || '{}'));
   const accountButtonRef = useRef();
+  const installedJava = localStorage.javas ? JSON.parse(localStorage.javas) : [];
 
   // eslint-disable-next-line @typescript-eslint/ban-types
-  const isEmpty = (obj: object) => {
+  const isNotEmpty = (obj: object) => {
     return !!Object.keys(obj).length;
   };
 
@@ -126,6 +128,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 assets: manifest.assets,
                 gameArguments: gameArguments,
                 jvmArguments: manifest.arguments.jvm,
+                javaVersion: manifest.javaVersion?.majorVersion || 8,
               };
             } catch (e) {
               return void 0;
@@ -188,10 +191,10 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 >
                   <ListItemText
                     primary={
-                      isEmpty(selectedVersion) ? selectedVersion.displayName : <FormattedMessage id="home.noVer" />
+                      isNotEmpty(selectedVersion) ? selectedVersion.displayName : <FormattedMessage id="home.noVer" />
                     }
                     secondary={
-                      isEmpty(selectedVersion) ? selectedVersion.displayId : <FormattedMessage id="home.chooseVer" />
+                      isNotEmpty(selectedVersion) ? selectedVersion.displayId : <FormattedMessage id="home.chooseVer" />
                     }
                   />
                 </ListItem>
@@ -202,9 +205,11 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                   }}
                 >
                   <ListItemText
-                    primary={isEmpty(selectedAccount) ? selectedAccount.name : <FormattedMessage id="home.noAccount" />}
+                    primary={
+                      isNotEmpty(selectedAccount) ? selectedAccount.name : <FormattedMessage id="home.noAccount" />
+                    }
                     secondary={
-                      isEmpty(selectedAccount) ? (
+                      isNotEmpty(selectedAccount) ? (
                         <FormattedMessage id={`account.${selectedAccount.type}`} />
                       ) : (
                         <FormattedMessage id="home.chooseAccount" />
@@ -212,8 +217,21 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                     }
                   />
                 </ListItem>
+                <ListItem button disabled>
+                  <ListItemText primary="0 mods enabled" secondary="NO FORGE OR FABRIC" />
+                </ListItem>
                 <ListItem>
-                  <Button variant="contained" style={{ width: '100%', height: 50 }}>
+                  <Button
+                    variant="contained"
+                    style={{ width: '100%' }}
+                    disabled={
+                      !(
+                        isNotEmpty(selectedVersion) &&
+                        isNotEmpty(selectedAccount) &&
+                        installedJava.includes(selectedVersion.javaVersion)
+                      )
+                    }
+                  >
                     <FormattedMessage id="home.launch" />
                   </Button>
                 </ListItem>
@@ -342,7 +360,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                     button
                     onClick={() => {
                       setAccountButtonState(AccountButtonState.hidden);
-                      electron.shell.openExternal('https://www.minecraft.net/store/minecraft-java-edition');
+                      electron.shell.openExternal('https://www.minecraft.net/store/minecraft-java-edition').then();
                     }}
                   >
                     <ListItemIcon>

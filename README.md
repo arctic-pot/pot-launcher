@@ -14,7 +14,6 @@ No plugin interface - but the original launcher is OK
 - install Forge, Optifine, Server.jar, etc.
 - Manage mods
 - Manage resource packs
-- Manage Map NBT
 
 ## About
 
