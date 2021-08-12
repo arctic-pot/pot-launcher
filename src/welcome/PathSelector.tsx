@@ -15,9 +15,8 @@ export default function PathSelector(props: WelcomeComponentProps): React.ReactE
               className="lang-button"
               disabled={os.type() !== 'Windows_NT'}
               onClick={() => {
-                if (os.type() === 'Windows_NT') {
-                  localStorage.gamePath = path.resolve(os.homedir(), './.minecraft');
-                }
+                // We make sure it's windows.
+                localStorage.gamePath = path.resolve(process.env.APPDATA, './.minecraft');
                 props.setCompleted(2);
               }}
             >
