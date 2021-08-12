@@ -29,9 +29,6 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
         <div>
           <FormattedMessage id="welcome.password.subtitle.l2" />
         </div>
-        <div>
-          <FormattedMessage id="welcome.password.subtitle.l3" />
-        </div>
       </div>
       <div style={{ boxSizing: 'border-box', margin: 20 }}>
         <div>
@@ -63,7 +60,6 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
           onClick={() => {
             // check password same
             if (password === passwordRepeated) {
-              localStorage.TEMP_password = password;
               mergeMetadata({
                 pwd: CryptoJS.MD5(CryptoJS.SHA512(CryptoJS.SHA224(password + salt) + salt) + salt).toString(),
               });

@@ -10,7 +10,6 @@
   "welcome.path.unofficial": "Select manually later",
   "welcome.password.subtitle.l1": "Almost done! But you have to set a password to keep your access token(s) safe.",
   "welcome.password.subtitle.l2": "Remember your password or your saved account will not be able to log in!",
-  "welcome.password.subtitle.l3": "This password is saved in plain text before you create the account.",
   "welcome.password.pwd": "Password",
   "welcome.password.pwd.check": "Repeat password",
   "welcome.password.pwd.different": "The password and repeat password are different",

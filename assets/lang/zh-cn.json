@@ -10,7 +10,6 @@
   "welcome.path.unofficial": "稍后手动选择路径",
   "welcome.password.subtitle.l1": "就快好了！但是你需要设置一个密码来保护你的验证令牌。",
   "welcome.password.subtitle.l2": "请牢记您设置的密码，否则您保存的所有账户都将无法登录！",
-  "welcome.password.subtitle.l3": "在你创建第一个账户前，密码会以明文保存。",
   "welcome.password.pwd": "密码",
   "welcome.password.pwd.check": "确认密码",
   "welcome.password.pwd.different": "确认的密码和输入的密码不同",
