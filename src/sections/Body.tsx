@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Tab, Tabs } from '@material-ui/core';
+import { Fade, Tab, Tabs } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 import './Body.scss';
 import Home from './body/Home';
@@ -34,9 +34,11 @@ export default function (): React.ReactElement {
   const TabPage = (props: TabPageProps) => {
     const { value, children } = props;
     return (
-      <div className={classNames('tab-page')} hidden={openingTab !== value}>
-        {openingTab === value && children}
-      </div>
+      <Fade in={openingTab === value}>
+        <div className={classNames('tab-page')} hidden={openingTab !== value}>
+          {openingTab === value && children}
+        </div>
+      </Fade>
     );
   };
 

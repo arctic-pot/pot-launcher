@@ -30,7 +30,7 @@ export default function LangChooser(props: WelcomeComponentProps): React.ReactEl
                   lang={lang[0]}
                   onClick={() => {
                     localStorage.locale = lang[0];
-                    props.setCompleted(1);
+                    props.setCompleted(0);
                   }}
                 >
                   {lang[1]}

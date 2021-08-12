@@ -21,7 +21,7 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
   };
 
   return (
-    <div style={{ boxSizing: 'border-box', padding: 20 }}>
+    <div>
       <div style={{ boxSizing: 'border-box', margin: 20 }}>
         <div>
           <FormattedMessage id="welcome.password.subtitle.l1" />
@@ -59,13 +59,15 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
           color="primary"
           onClick={() => {
             // check password same
-            if (password === passwordRepeated) {
-              mergeMetadata({
-                pwd: CryptoJS.MD5(CryptoJS.SHA512(CryptoJS.SHA224(password + salt) + salt) + salt).toString(),
-              });
-              props.setCompleted(3);
-            } else {
-              setError(intl.formatMessage({ id: 'welcome.password.pwd.different' }));
+            if (password.length > 0) {
+              if (password === passwordRepeated) {
+                mergeMetadata({
+                  pwd: CryptoJS.MD5(CryptoJS.SHA512(CryptoJS.SHA224(password + salt) + salt) + salt).toString(),
+                });
+                props.setCompleted(1);
+              } else {
+                setError(intl.formatMessage({ id: 'welcome.password.pwd.different' }));
+              }
             }
           }}
         >

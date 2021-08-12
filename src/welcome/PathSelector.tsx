@@ -32,7 +32,7 @@ export default function PathSelector(props: WelcomeComponentProps): React.ReactE
             <ButtonBase
               className="lang-button"
               onClick={() => {
-                props.setCompleted(2);
+                props.setCompleted(1);
               }}
             >
               <FormattedMessage id="welcome.path.unofficial" />
