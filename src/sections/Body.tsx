@@ -34,9 +34,9 @@ export default function (): React.ReactElement {
   const TabPage = (props: TabPageProps) => {
     const { value, children } = props;
     return (
-      <Fade in={openingTab === value}>
+      <Fade in={openingTab === value} timeout={500}>
         <div className={classNames('tab-page')} hidden={openingTab !== value}>
-          {openingTab === value && children}
+          {children}
         </div>
       </Fade>
     );
