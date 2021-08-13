@@ -21,6 +21,11 @@ Pot launcher is a TechPot International Project built with electron & react
 
 Used UI framework of Material UI
 
+### Why Electron?
+For rapid update and iteration, we have to use C#, JS, etc.
+For WPF, it's Windows-only. For Electron, it's cross-platform. 
+We chose Electron at last.
+
 ### Privacy
 
 Privacy is your right. We will defend that right for you.
