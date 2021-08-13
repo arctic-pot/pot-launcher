@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './OpeningScreen.scss';
-import { Button, createStyles, makeStyles, Paper, TextField, Theme, Typography } from '@material-ui/core';
+import { Button, createStyles, Grow, makeStyles, Paper, TextField, Theme, Typography } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
 import CryptoJS from 'crypto-js';
 
@@ -59,9 +59,15 @@ export default function OpeningScreen(): React.ReactElement {
         <div>
           <br />
         </div>
-        <Button variant="contained" color="primary" className={classes.full} onClick={submit}>
-          <FormattedMessage id="open.sign" />
-        </Button>
+        <Grow in={!!password} timeout={500}>
+          <div>
+            {password && (
+              <Button variant="contained" color="primary" className={classes.full} onClick={submit}>
+                <FormattedMessage id="open.sign" />
+              </Button>
+            )}
+          </div>
+        </Grow>
       </Paper>
     </div>
   );
