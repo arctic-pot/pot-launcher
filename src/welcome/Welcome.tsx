@@ -8,6 +8,7 @@ import { FormattedMessage, IntlProvider } from 'react-intl';
 //import PathSelector from './PathSelector';
 import PasswordSetter from './PasswordSetter';
 import Finish from './Finish';
+import ArtifactsDownloader from './ArtifactsDownloader';
 
 const AVAILABLE_LANG_LIST = ['zh-CN', 'en-US'];
 
@@ -64,6 +65,11 @@ export default function Welcome(): React.ReactElement {
         </Step>
         <Step completed={completed >= 2}>
           <StepLabel>
+            <FormattedMessage id="welcome.step.down" />
+          </StepLabel>
+        </Step>
+        <Step completed={completed >= 3}>
+          <StepLabel>
             <FormattedMessage id="welcome.step.ok" />
           </StepLabel>
         </Step>
@@ -76,7 +82,10 @@ export default function Welcome(): React.ReactElement {
             <div>{completed === 0 && <PasswordSetter setCompleted={setCompleted} />}</div>
           </Grow>
           <Grow in={completed === 1} timeout={500}>
-            <div>{completed === 1 && <Finish />}</div>
+            <div>{completed === 1 && <ArtifactsDownloader setCompleted={setCompleted} />}</div>
+          </Grow>
+          <Grow in={completed === 2} timeout={500}>
+            <div>{completed === 2 && <Finish />}</div>
           </Grow>
         </Paper>
       </div>

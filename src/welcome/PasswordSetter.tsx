@@ -22,7 +22,7 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
 
   return (
     <div>
-      <div style={{ boxSizing: 'border-box', margin: 20 }}>
+      <div style={{ boxSizing: 'border-box', marginBottom: 20 }}>
         <div>
           <FormattedMessage id="welcome.password.subtitle.l1" />
         </div>
@@ -30,7 +30,7 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
           <FormattedMessage id="welcome.password.subtitle.l2" />
         </div>
       </div>
-      <div style={{ boxSizing: 'border-box', margin: 20 }}>
+      <div style={{ boxSizing: 'border-box', margin: '20px 0' }}>
         <div>
           <TextField
             label={<FormattedMessage id="welcome.password.pwd" />}
@@ -53,7 +53,7 @@ export default function PasswordSetter(props: WelcomeComponentProps): React.Reac
           />
         </div>
       </div>
-      <div style={{ boxSizing: 'border-box', margin: 20 }}>
+      <div style={{ boxSizing: 'border-box', marginTop: 20 }}>
         <Button
           variant="contained"
           color="primary"
