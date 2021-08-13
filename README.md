@@ -15,6 +15,15 @@ No plugin interface - but the original launcher is OK
 - Manage mods
 - Manage resource packs
 
+## System Requirements
+
+**1 GB** on system disk is required.
+**3 GB** reserved for saves is recommended.
+
+For more requirements, visit
+<https://www.minecraft.net/zh-hans/get-minecraft>
+for information.
+
 ## About
 
 Pot launcher is a TechPot International Project built with electron & react
@@ -22,8 +31,9 @@ Pot launcher is a TechPot International Project built with electron & react
 Used UI framework of Material UI
 
 ### Why Electron?
+
 For rapid update and iteration, we have to use C#, JS, etc.
-For WPF, it's Windows-only. For Electron, it's cross-platform. 
+For WPF, it's Windows-only. For Electron, it's cross-platform.
 We chose Electron at last.
 
 ### Privacy
@@ -32,7 +42,7 @@ Privacy is your right. We will defend that right for you.
 Pot Launcher used AEC and two-factors of hash with salt for encrypt your access token, with a password set by your own, which is encrypted with SHA-224 and salt.
 The decrypt token will be destroyed when you exit the launcher.
 
-All salt used for encryption have 48 characters. 
+All salt used for encryption have 48 characters.
 Each character is randomly selected from all ASCII characters excluding space, backslash and double quote.
 
 ### Storage
