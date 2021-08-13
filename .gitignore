@@ -94,3 +94,4 @@ out/
 # Application File
 .minecraft/
 .pml/
+artifacts/
