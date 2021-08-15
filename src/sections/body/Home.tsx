@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
   Button,
-  Drawer, Grow,
+  Drawer,
+  Grow,
   IconButton,
   List,
   ListItem,
@@ -11,7 +12,7 @@ import {
   ListItemText,
   ListSubheader,
   Paper,
-  Popover
+  Popover,
 } from '@material-ui/core';
 import { BodyTabs, PropsReceiveTabState } from '../Body';
 import './Home.scss';
@@ -74,7 +75,6 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
   const [selectedVersion, setSelectedVersion] = useState<Version>(JSON.parse(localStorage.selectedVersion || '{}'));
   const [selectedAccount, setSelectedAccount] = useState<Account>(JSON.parse(localStorage.selectedAccount || '{}'));
   const accountButtonRef = useRef();
-  const installedJava = localStorage.javas ? JSON.parse(localStorage.javas) : [];
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   const isNotEmpty = (obj: object) => {
@@ -220,18 +220,12 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 <ListItem button disabled>
                   <ListItemText primary="0 mods enabled" secondary="NO FORGE OR FABRIC" />
                 </ListItem>
-                <Grow timeout={500} in >
+                <Grow timeout={500} in>
                   <ListItem>
                     <Button
                       variant="contained"
                       style={{ width: '100%' }}
-                      disabled={
-                        !(
-                          isNotEmpty(selectedVersion) &&
-                          isNotEmpty(selectedAccount) &&
-                          installedJava.includes(selectedVersion.javaVersion)
-                        )
-                      }
+                      disabled={!(isNotEmpty(selectedVersion) && isNotEmpty(selectedAccount))}
                     >
                       <FormattedMessage id="home.launch" />
                     </Button>
