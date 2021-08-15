@@ -25,12 +25,14 @@ export const fixString = (strings: Record<string, string>): Record<string, strin
 };
 
 // choose the locale local
-const strings = fixString((
-  {
-    'en-US': enUS,
-    'zh-CN': zhCN,
-  } as unknown as Record<string, Record<string, string>>
-)[localStorage.locale || 'en-US']); // same as `switch` statement
+const strings = fixString(
+  (
+    {
+      'en-US': enUS,
+      'zh-CN': zhCN,
+    } as unknown as Record<string, Record<string, string>>
+  )[localStorage.locale || 'en-US']
+); // same as `switch` statement
 
 const rootElement = document.getElementById('root');
 
