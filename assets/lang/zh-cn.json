@@ -2,8 +2,6 @@
   "title.reload": "重新启动",
   "title.minimize": "最小化",
   "title.close": "关闭",
-  "welcome.step.lang": "选择语言",
-  "welcome.step.path": "选择游戏路径",
   "welcome.step.down": "下载部件",
   "welcome.step.pwd": "设置密钥",
   "welcome.step.ok": "完成！",

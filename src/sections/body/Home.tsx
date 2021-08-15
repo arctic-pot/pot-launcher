@@ -51,6 +51,13 @@ export interface Version {
   gameArguments: (string | ArgumentWithRule)[];
   jvmArguments?: (string | ArgumentWithRule)[];
   javaVersion: 8 | 16;
+  /**
+   * HMCL, aka. Hello Minecraft Launcher,
+   * a famous third-party Minecraft launcher in China.
+   * It will modify client.json to make other launchers can't identify it.
+   * Thanks, H.M.C.L.!
+   */
+  hmcl?: boolean;
 }
 
 export interface Account {
@@ -129,6 +136,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 gameArguments: gameArguments,
                 jvmArguments: manifest.arguments.jvm,
                 javaVersion: manifest.javaVersion?.majorVersion || 8,
+                hmcl: true,
               };
             } catch (e) {
               return void 0;

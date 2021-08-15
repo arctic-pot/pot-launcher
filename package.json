@@ -14,7 +14,9 @@
     "format:write": "prettier --write \"src/**/*.{tsx,ts,js}\"",
     "format:check": "prettier --list-different \"src/**/*.{tsx,ts,js}\"",
     "format": "npm run format:check || npm run format:write",
-    "code-style-check": "npm run format:check && npm run lint"
+    "code-style-check": "npm run format:check && npm run lint",
+    "create-lang": "node ./scripts/add-lang.js",
+    "check-lang": "node ./scripts/check-lang-files.js"
   },
   "keywords": [],
   "author": {
@@ -90,6 +92,7 @@
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "@vercel/webpack-asset-relocator-loader": "^1.6.0",
+    "chalk": "^4.1.2",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.0",
     "dart-sass": "^1.25.0",
@@ -98,6 +101,7 @@
     "eslint-import-resolver-webpack": "^0.13.1",
     "eslint-plugin-import": "^2.20.0",
     "fork-ts-checker-webpack-plugin": "^6.0.1",
+    "iso-639-1": "^2.1.9",
     "node-loader": "^2.0.0",
     "node-sass": "^6.0.0",
     "prettier": "^2.3.0",
@@ -120,6 +124,7 @@
     "fs-extra": "^10.0.0",
     "got": "^11.8.2",
     "graceful-fs": "^4.2.6",
+    "inquirer": "^8.1.2",
     "node-watch": "^0.7.1",
     "notistack": "^1.0.9",
     "progress-stream": "^2.0.0",
