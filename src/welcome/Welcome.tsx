@@ -9,6 +9,8 @@ import { FormattedMessage, IntlProvider } from 'react-intl';
 import PasswordSetter from './PasswordSetter';
 import Finish from './Finish';
 import ArtifactsDownloader from './ArtifactsDownloader';
+// this import may looks weird... whatever.
+import { fixString } from '../RenderReact';
 
 const AVAILABLE_LANG_LIST = ['zh-CN', 'en-US'];
 
@@ -46,7 +48,7 @@ export default function Welcome(): React.ReactElement {
   }
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <IntlProvider locale={locale} messages={lang[localStorage.locale]}>
+    <IntlProvider locale={locale} messages={fixString(lang[localStorage.locale])}>
       <Stepper activeStep={completed}>
         {/*<Step completed={completed >= 1}>
           <StepLabel>

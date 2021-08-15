@@ -27,6 +27,16 @@ module.exports = {
     electron: 'commonjs2 electron',
   },
   optimization: {
-    minimizer: [new TerserPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          mangle: {
+            properties: {
+              regex: /^.+(\..+)+$/
+            },
+          }
+        },
+      }),
+    ],
   },
 };

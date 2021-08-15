@@ -31,5 +31,14 @@ module.exports = [
   {
     test: /\.txt$/,
     type: 'asset/source'
+  },
+  {
+    test: /\.json$/,
+    type: 'asset/inline',
+    generator: {
+      dataUrl: content => {
+        return JSON.parse(content);
+      }
+    }
   }
 ];
