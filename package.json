@@ -16,7 +16,8 @@
     "format": "npm run format:check || npm run format:write",
     "code-style-check": "npm run format:check && npm run lint",
     "create-lang": "node ./scripts/add-lang.js",
-    "check-lang": "node ./scripts/check-lang-files.js"
+    "check-lang": "node ./scripts/check-lang-files.js",
+    "fix-lang": "node ./scripts/fix-lang-files.js"
   },
   "keywords": [],
   "author": {
