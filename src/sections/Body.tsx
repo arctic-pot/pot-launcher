@@ -15,7 +15,7 @@ export type PropsReceiveTabState<T> = T & {
 
 export enum BodyTabs {
   home,
-  server,
+  download,
   tool,
   mods,
   settings,
@@ -52,7 +52,7 @@ export default function (): React.ReactElement {
         <nav>
           <Tabs centered value={openingTab} onChange={handleChange} indicatorColor="primary" textColor="primary">
             <Tab label={<FormattedMessage id="home.title" />} />
-            <Tab label={<FormattedMessage id="server.title" />} />
+            <Tab label={<FormattedMessage id="down.title" />} />
             <Tab label={<FormattedMessage id="tool.title" />} />
             <Tab label={<FormattedMessage id="mods.title" />} />
             <Tab label={<FormattedMessage id="settings.title" />} />

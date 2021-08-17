@@ -48,6 +48,7 @@ export interface Version {
   id: string;
   displayId: string;
   snapshot: boolean;
+  assets: string;
   gameArguments: (string | ArgumentWithRule)[];
   jvmArguments?: (string | ArgumentWithRule)[];
   javaVersion: 8 | 16;
@@ -95,7 +96,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
       const versionDirectories = fs.readdirSync(versionsDirectory);
       setVersionsList(
         versionDirectories
-          .map((version) => {
+          .map((version): Version => {
             const _versionManifestPath = path.resolve(versionsDirectory, `./${version}/${version}.json`);
             try {
               const manifest = fs.readJsonSync(_versionManifestPath);
