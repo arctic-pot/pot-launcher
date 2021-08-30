@@ -14,7 +14,7 @@ import {
   Paper,
   Popover,
 } from '@material-ui/core';
-import { BodyTabs, PropsReceiveTabState } from '../Body';
+import { BodyTabs, PropsReceiveTabState } from 'ui/main/Body';
 import './Home.scss';
 import ExternalLinkIcon from '@material-ui/icons/OpenInNewRounded';
 import DeleteIcon from '@material-ui/icons/DeleteRounded';
@@ -24,7 +24,7 @@ import OfflineAccountDialog from './newAccount/OfflineAccountDialog';
 import { mergeMetadata } from 'utils/config';
 import electron from 'electron';
 import os from 'os';
-import { IVersion, Version, IRule, sortVersions } from '../../../base/version/version';
+import { IVersion, Version, IRule, sortVersions } from 'base/version/version';
 
 enum AccountButtonState {
   hidden,

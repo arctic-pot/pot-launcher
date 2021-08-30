@@ -1,4 +1,4 @@
-import { Directory } from '../../typings/common';
+import { Directory } from 'typings/common';
 import fs from 'fs-extra';
 
 type RuleFeatures = 'is_demo_user' | 'has_custom_resolution';

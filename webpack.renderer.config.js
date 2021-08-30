@@ -18,8 +18,10 @@ module.exports = {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.svg'],
     alias: {
       assets: resolve('./assets'),
-      components: resolve('./src/components'),
-      utils: resolve('./src/utils'),
+      base: resolve('./src/base'),
+      ui: resolve('./src/ui'),
+      typings: resolve('./src/typings'),
+      utils: resolve('./src/utils')
     },
   },
   target: 'node',

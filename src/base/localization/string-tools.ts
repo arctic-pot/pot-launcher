@@ -1,5 +1,5 @@
 import langKeys from 'assets/lang/keys.json';
-import { Directory } from '../../typings/common';
+import { Directory } from 'typings/common';
 
 export const fixString = (strings: Directory): Directory => {
   // For minify pack size, we mangled language key names,

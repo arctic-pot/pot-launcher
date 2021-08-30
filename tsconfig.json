@@ -14,7 +14,9 @@
     "paths": {
       "*": ["node_modules/*"],
       "assets/*": ["./assets/*"],
-      "components/*": ["./src/components/*"],
+      "base/*": ["./src/base/*"],
+      "ui/*": ["./src/ui/*"],
+      "typings/*": ["./src/typings/*"],
       "utils/*": ["./src/utils/*"]
     },
     "types": ["react-router-dom"]
