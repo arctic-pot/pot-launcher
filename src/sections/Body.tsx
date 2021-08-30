@@ -27,11 +27,13 @@ export default function (): React.ReactElement {
   const handleChange = (e: React.ChangeEvent<unknown>, newValue: number) => {
     setOpeningTab(newValue);
   };
-  interface TabPageProps {
+
+  interface ITabPageProps {
     value: number;
     children: React.ReactElement;
   }
-  const TabPage = (props: TabPageProps) => {
+
+  const TabPage = (props: ITabPageProps) => {
     const { value, children } = props;
     return (
       <Fade in={openingTab === value} timeout={500}>
