@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import TitleBar from './sections/TitleBar';
-import Body from './sections/Body';
+import TitleBar from './main/TitleBar';
+import Body from './main/Body';
 import Welcome from './welcome/Welcome';
 import { IntlProvider } from 'react-intl';
 import { ThemeProvider } from '@material-ui/core';

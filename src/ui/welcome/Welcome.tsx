@@ -9,8 +9,7 @@ import { FormattedMessage, IntlProvider } from 'react-intl';
 import PasswordSetter from './PasswordSetter';
 import Finish from './Finish';
 import ArtifactsDownloader from './ArtifactsDownloader';
-// this import may looks weird... whatever.
-import { fixString } from '../RenderReact';
+import { fixString } from '../../base/localization/string-tools';
 
 const AVAILABLE_LANG_LIST = ['zh-CN', 'en-US'];
 

@@ -1,8 +1,8 @@
 // import another file to load
 import './RenderReact';
-import './utilityClass.scss';
+import './ui/utilityClass.scss';
 import 'animate.css/animate.compat.css';
-import './index.scss';
+import './ui/index.scss';
 import fs from 'fs-extra';
 import path from 'path';
 import os from 'os';
