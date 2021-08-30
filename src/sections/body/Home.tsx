@@ -23,6 +23,7 @@ import path from 'path';
 import OfflineAccountDialog from './newAccount/OfflineAccountDialog';
 import { mergeMetadata } from 'utils/config';
 import electron from 'electron';
+import os from 'os';
 
 enum AccountButtonState {
   hidden,
@@ -32,25 +33,41 @@ enum AccountButtonState {
   injector,
 }
 
-interface ArgumentRule {
+type RuleFeatures = 'is_demo_user' | 'has_custom_resolution';
+type RuleOs = 'name' | 'version' | 'arch';
+
+interface IRule {
   action: 'allow' | 'disallow';
-  feature?: Record<string, boolean>;
-  os?: Record<string, string>;
+  features?: Record<RuleFeatures, boolean>;
+  os?: Record<RuleOs, string>;
 }
 
-export interface ArgumentWithRule {
-  rules: ArgumentRule[];
+export interface IArgumentWithRule {
+  rules: IRule[];
   value: string[] | string;
 }
 
-export interface Version {
+export interface ILibrary {
+  downloads: {
+    artifact: {
+      path: string;
+      sha1?: string;
+      size?: number;
+      url: string;
+    };
+  };
+  name: string;
+  rules?: IRule[];
+}
+
+export interface IVersion {
   displayName: string;
   id: string;
   displayId: string;
   snapshot: boolean;
   assets: string;
-  gameArguments: (string | ArgumentWithRule)[];
-  jvmArguments?: (string | ArgumentWithRule)[];
+  gameArguments: (string | IArgumentWithRule)[];
+  jvmArguments?: (string | IArgumentWithRule)[];
   javaVersion: 8 | 16;
   /**
    * HMCL, aka. Hello Minecraft Launcher,
@@ -59,9 +76,10 @@ export interface Version {
    * Thanks, H.M.C.L.!
    */
   hmcl?: boolean;
+  libraries: ILibrary[];
 }
 
-export interface Account {
+export interface IAccount {
   name: string;
   type: 'offline' | 'microsoft' | 'injector';
   clientToken?: string;
@@ -78,10 +96,10 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
   const [versionDrawerOpen, setVersionDrawerOpen] = useState(false);
   const [accountDrawerOpen, setAccountDrawerOpen] = useState(false);
   const [accountButtonState, setAccountButtonState] = useState(AccountButtonState.hidden);
-  const [versionsList, setVersionsList] = useState<Version[]>();
-  const [accountsList, setAccountsList] = useState<Account[]>(window.temp.accounts.accounts);
-  const [selectedVersion, setSelectedVersion] = useState<Version>(JSON.parse(localStorage.selectedVersion || '{}'));
-  const [selectedAccount, setSelectedAccount] = useState<Account>(JSON.parse(localStorage.selectedAccount || '{}'));
+  const [versionsList, setVersionsList] = useState<IVersion[]>();
+  const [accountsList, setAccountsList] = useState<IAccount[]>(window.temp.accounts.accounts);
+  const [selectedVersion, setSelectedVersion] = useState<IVersion>(JSON.parse(localStorage.selectedVersion || '{}'));
+  const [selectedAccount, setSelectedAccount] = useState<IAccount>(JSON.parse(localStorage.selectedAccount || '{}'));
   const accountButtonRef = useRef();
 
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -96,7 +114,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
       const versionDirectories = fs.readdirSync(versionsDirectory);
       setVersionsList(
         versionDirectories
-          .map((version): Version => {
+          .map((version): IVersion => {
             const _versionManifestPath = path.resolve(versionsDirectory, `./${version}/${version}.json`);
             try {
               const manifest = fs.readJsonSync(_versionManifestPath);
@@ -138,6 +156,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 jvmArguments: manifest.arguments.jvm,
                 javaVersion: manifest.javaVersion?.majorVersion || 8,
                 hmcl: true,
+                libraries: manifest.libraries,
               };
             } catch (e) {
               return void 0;
@@ -180,9 +199,61 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
     }
   }, [JSON.stringify(accountsList)]);
 
-  const selectVersion = (version: Version) => {
+  const selectVersion = (version: IVersion) => {
     setSelectedVersion(version);
     setVersionDrawerOpen(false);
+  };
+
+  const osName = () => {
+    const osType = os.type();
+    switch (osType) {
+      case 'Windows_NT':
+        return 'windows';
+      case 'Darwin':
+        return 'osx';
+    }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const judgeRule = (rule: IRule) => {
+    const isAllow = rule.action === 'allow';
+    // os rules
+    if (rule.os) {
+      // actually the relationship between rules is 'and'
+      // so we just find the rule that doesn't fit the actual
+
+      let meetRule = true;
+      if (rule.os.arch && rule.os.arch !== os.arch()) meetRule = false;
+      if (rule.os.name && rule.os.name !== osName()) meetRule = false;
+      if (rule.os.version && !RegExp(rule.os.version).test(os.release())) meetRule = false;
+      return isAllow ? meetRule : !meetRule;
+    } else if (rule.features) {
+      let meetRule = false;
+      if (rule.features.is_demo_user) meetRule = false;
+      if (rule.features.has_custom_resolution) meetRule = false;
+      return meetRule;
+    }
+  };
+
+  const startGame = () => {
+    // log the launch arguments
+    const fixPath = (pathname: string) => {
+      switch (os.type()) {
+        case 'Windows_NT':
+          return `"${pathname}"`;
+        //case 'Darwin':
+        //  return pathname.replace(/ /g, '" "');
+        //case 'Linux':
+        //  return pathname.replace(/\/.+( .+)+\//g, (word) => `'${word}'`);
+        default:
+          return pathname;
+      }
+    };
+    const suffix = os.type() === 'Windows_NT' ? '.exe' : '';
+    const java8Path = path.join(process.cwd(), './artifacts/jre8u302/bin/java' + suffix);
+    const java16Path = path.join(process.cwd(), './artifacts/jre-16.0.2/bin/java' + suffix);
+    const javaPath = fixPath(selectedVersion.javaVersion === 16 ? java16Path : java8Path);
+    console.log(`Starting game with following arguments:\n\n%c${javaPath}`, 'font-weight: 600; color: #262626');
   };
 
   return (
@@ -235,6 +306,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                       variant="contained"
                       style={{ width: '100%' }}
                       disabled={!(isNotEmpty(selectedVersion) && isNotEmpty(selectedAccount))}
+                      onClick={startGame}
                     >
                       <FormattedMessage id="home.launch" />
                     </Button>
@@ -292,7 +364,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
                 }
               >
                 {accountsList
-                  ? accountsList.filter(Boolean).map((account: Account) => {
+                  ? accountsList.filter(Boolean).map((account: IAccount) => {
                       return (
                         <ListItem
                           key={account.name}
