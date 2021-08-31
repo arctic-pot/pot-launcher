@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { WelcomeComponentProps } from './Welcome';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, TextField } from '@material-ui/core';
-import { mergeMetadata } from 'utils/config';
+import { mergeMetadata } from 'base/configuration';
 import CryptoJS from 'crypto-js';
 
 export default function PasswordSetter(props: WelcomeComponentProps): React.ReactElement {
