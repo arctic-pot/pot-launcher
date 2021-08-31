@@ -21,7 +21,7 @@ import DeleteIcon from '@material-ui/icons/DeleteRounded';
 import fs from 'fs-extra';
 import path from 'path';
 import OfflineAccountDialog from './newAccount/OfflineAccountDialog';
-import { mergeMetadata } from 'utils/config';
+import { mergeMetadata } from 'base/configuration';
 import electron from 'electron';
 import os from 'os';
 import { IVersion, Version, IRule, versionsSorter } from 'base/version/version';
