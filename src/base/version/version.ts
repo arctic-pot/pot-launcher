@@ -52,6 +52,8 @@ export interface IVersion {
    * a famous third-party Minecraft launcher in China.
    * It will modify client.json to make other launchers can't identify it.
    * Thanks, H.M.C.L.!
+   *
+   * @when Installed version by HMCL
    */
   hmcl?: boolean;
 }
@@ -63,37 +65,37 @@ export interface IAccount {
   accessTokenEncrypted?: string;
 }
 
-// @hmcl-exclusive
-export interface VersionPatch extends Directory<unknown> {
+/** @exclusive game patches on HMCL */
+export interface IVersionPatch extends Directory<unknown> {
   id: string;
   version: string;
 }
 
 export class Version implements IVersion {
-  assets: string;
-  displayName: string;
-  gameArguments: IArgument[];
-  jvmArguments: IArgument[];
-  id: string;
-  javaVersion: 8 | 16;
-  libraries: ILibrary[];
-  snapshot: boolean;
-  hmcl?: boolean;
+  public assets: string;
+  public displayName: string;
+  public gameArguments: IArgument[];
+  public jvmArguments: IArgument[];
+  public id: string;
+  public javaVersion: 8 | 16;
+  public libraries: ILibrary[];
+  public snapshot: boolean;
+  public hmcl?: boolean;
 
-  // @hmcl-exclusive
-  private getPatchInfo(patches: VersionPatch[], patchName: string) {
-    const patchInfo = patches.find((patch: VersionPatch) => (patch.id = patchName));
+  /** @exclusive game patches on HMCL */
+  private getPatchInfo(patches: IVersionPatch[], patchName: string) {
+    const patchInfo = patches.find((patch: IVersionPatch) => (patch.id = patchName));
     // When the patch is not exist, `patchInfo` is `undefined`
     const patchExist = !!patchInfo;
     const patchVer = patchExist ? patchInfo.version : null;
     return [patchExist, patchVer];
   }
 
-  constructor(versionManifestPath: string) {
+  public constructor(versionManifestPath: string) {
     try {
       const manifest = fs.readJsonSync(versionManifestPath);
-      const patches: VersionPatch[] = manifest.patches;
-      const versionId = patches.find((patch: VersionPatch) => patch.id === 'game').version;
+      const patches: IVersionPatch[] = manifest.patches;
+      const versionId = patches.find((patch: IVersionPatch) => patch.id === 'game').version;
       const isSnapshot = manifest.type === 'snapshot';
       // region get forge, fabric, optifine, and display version
       const [fabricExist, fabricVersion] = this.getPatchInfo(patches, 'fabric');
@@ -124,8 +126,8 @@ export class Version implements IVersion {
   }
 }
 
-// Sort versions
-export function sortVersions(ver1: IVersion, ver2: IVersion): number {
+// Sort versions in Array.prototype.sort
+export function versionsSorter(ver1: IVersion, ver2: IVersion): number {
   // In Minecraft, major version is always 1.
   // Snapshot version and April Fool version should compare them specially
   // We provided their patch version as -1.

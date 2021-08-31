@@ -24,7 +24,7 @@ import OfflineAccountDialog from './newAccount/OfflineAccountDialog';
 import { mergeMetadata } from 'utils/config';
 import electron from 'electron';
 import os from 'os';
-import { IVersion, Version, IRule, sortVersions } from 'base/version/version';
+import { IVersion, Version, IRule, versionsSorter } from 'base/version/version';
 
 enum AccountButtonState {
   hidden,
@@ -69,7 +69,7 @@ export default function Home(props: PropsReceiveTabState<unknown>): React.ReactE
             return new Version(versionManifestPath);
           })
           .filter(isNotEmpty)
-          .sort(sortVersions)
+          .sort(versionsSorter)
       );
     }
   }, []);
