@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { FormattedMessage } from 'react-intl';
-import { mergeMetadata } from 'utils/config';
+import { mergeMetadata } from 'base/configuration';
 import { v4 as UUID4 } from 'uuid';
 
 export default function OfflineAccountDialog(props: Props): React.ReactElement {
