@@ -1,5 +1,5 @@
 {
-  "name": "pot-launcher",
+  "name": "@datapack-planet/pot-launcher",
   "productName": "pot-launcher",
   "version": "1.0.0",
   "description": "A modern Minecraft launcher with localization",
